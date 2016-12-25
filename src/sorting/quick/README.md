@@ -21,4 +21,4 @@ Quicksort with 3-way partitioning is entropy-optimal.
 Arrays with large numbers of dubplicated keys. For example, a subarray that consists solely of items that are equal does not
 need to be processed further, but general quicksort keeps partitioning down to small subarrays.
 
-<img src="./3WayPartitioning.png">
+<img src="/images/3WayPartitioning.png">
