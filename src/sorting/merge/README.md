@@ -4,7 +4,7 @@
 	
 **Top-down:** 
 
-<img src="/images/MergeTopDown.png">
+<img src="/images/MergeTopDown.png" width="500px">
 
 **Proposition G.** Top-down mergesort uses at most 6N lg N array accesses to sort an
 array of length N.
@@ -15,4 +15,5 @@ merge back, and at most 2N for compares).
 <hr>
 
 **Bottom-up**
-<img src="/images/MergeBottomUp.png">
+
+<img src="/images/MergeBottomUp.png" width="500px">
