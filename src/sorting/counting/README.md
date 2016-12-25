@@ -2,7 +2,7 @@
 
 It is more efficient to use a non-comparison sorting algorithm. This will make it possible to sort lists even in linear time. These challenges will cover Counting Sort, a fast way to sort lists where the elements have a small number of possible values, such as integers within a certain range.
 
-<img src="./CountingSort.png">
+<img src="/images/CountingSort.png">
 
 CountingSort(Array, range)
 
