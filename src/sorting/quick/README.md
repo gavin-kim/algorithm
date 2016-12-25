@@ -3,7 +3,7 @@
 A constant factor of 1.39N lg N whenever it is used to sort N items. The same is true of mergesort,<br>
 but quicksort is typically faster because (even though it does 39 percent more compares)
 
-<img src="/images/QuickSort.png" width="500px">
+<img src="/images/QuickSort.png" width="500px" height="500px">
 <hr>
 Insertion Sort and the simple version of Quicksort were stable, <br> 
 but the faster **in-place** version of Quicksort was not (since it scrambled around elements while sorting).
