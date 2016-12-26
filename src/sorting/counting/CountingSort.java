@@ -1,10 +1,10 @@
+package sorting.counting;
+
 import java.io.*;
 import java.util.*;
 
 public class CountingSort {
 
-    public static void main(String[] args) {
-    }
 
     public static int[] countingSort(int[] arr, int k) {
 
@@ -14,12 +14,12 @@ public class CountingSort {
         // array to store sorted values
         int[] sortedArr = new int[arr.length];
 
-        // count occurence
+        // count occurrence
         for (int i = 0; i < arr.length; i++) {
             countOcc[arr[i]]++;
         }
 
-        // add counted occurence
+        // add counted occurrence
         for (int i = 1; i < k; i++) {
             countOcc[i] += countOcc[i - 1];
         }
@@ -36,10 +36,10 @@ public class CountingSort {
 
     public static int[] countingSortWithValues(int[] keys, String[] values, int k) {
 
-        int[] count = new int[k]; // count occurence
+        int[] count = new int[k]; // count occurrence
         int[] sortedKeys = new int[keys.length]; // keys
         int[] valueIndex = new int[keys.length]; // value's index (optional)
-
+        StringBuilder builder = new StringBuilder();
 
         for (int i = 0; i < keys.length; i++) {
             count[keys[i]]++;
@@ -59,7 +59,7 @@ public class CountingSort {
             if (valueIndex[i] < keys.length / 2)
                 builder.append("- ");
             else
-                builder.append(values[valueIndex[i]] + " ");
+                builder.append(values[valueIndex[i]]).append(" ");
         }
 
         return sortedKeys;

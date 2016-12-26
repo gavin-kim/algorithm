@@ -1,3 +1,5 @@
+package sorting.merge;
+
 import java.util.Arrays;
 import java.util.PrimitiveIterator;
 import java.util.Random;
@@ -6,30 +8,6 @@ import java.util.stream.Stream;
 
 public class MergeSort {
 
-    public static final int MAX = 11;
-
-    public static void main(String[] args) {
-
-        int[] arr = new Random().ints(MAX).toArray();
-
-        long start = System.nanoTime();
-
-        mergeSortBU(arr);
-
-        long end = System.nanoTime();
-        System.out.println((end - start) + "ns");
-
-        IntStream.of(arr).forEach(System.out::println);
-
-        arr = new Random().ints(MAX).toArray();
-
-        start = System.nanoTime();
-
-        mergeSortBU(arr);
-
-        end = System.nanoTime();
-        System.out.println((end - start) + "ns");
-    }
 
     // Top Down merge sort
     public static void mergeSortTD(int[] arr) {
