@@ -2,9 +2,9 @@
 
 A constant factor of 1.39N lg N whenever it is used to sort N items. The same is true of mergesort,<br>
 but quicksort is typically faster because (even though it does 39 percent more compares)
-<hr>
-Insertion Sort and the simple version of Quicksort were stable, <br> 
-but the faster **in-place** version of Quicksort was not (since it scrambled around elements while sorting).
+
+<img src="/images/QuickSort.png" width="400px" height="400px">
+
 <hr>
 <h3>To improve the performance</h3>
 
@@ -21,4 +21,4 @@ Quicksort with 3-way partitioning is entropy-optimal.
 Arrays with large numbers of dubplicated keys. For example, a subarray that consists solely of items that are equal does not
 need to be processed further, but general quicksort keeps partitioning down to small subarrays.
 
-<img src="./3WayPartitioning.png">
+<img src="/images/3WayPartitioning.png">

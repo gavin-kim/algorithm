@@ -1,2 +1,2 @@
 #Algorithm
-<img src="./images/AnalysisAlgorithm.png">
+<img src="./images/AnalysisAlgorithm.png" width="500px">
