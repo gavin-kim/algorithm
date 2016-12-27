@@ -1,10 +1,5 @@
 package sorting.merge;
 
-import java.util.Arrays;
-import java.util.PrimitiveIterator;
-import java.util.Random;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class MergeSort {
 

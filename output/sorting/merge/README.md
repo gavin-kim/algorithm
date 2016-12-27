@@ -1,8 +1,10 @@
 # Merge sort
-	
-**Top-down mergesort:** 1/2 NlogN ~ NlogN compares to sort an array of length N
 
-<img src="./MergeTopDown.png">
+`1/2 NlogN ~ NlogN compares to sort an array of length N`
+	
+**Top-down:** 
+
+<img src="/images/MergeTopDown.png" width="500px">
 
 **Proposition G.** Top-down mergesort uses at most 6N lg N array accesses to sort an
 array of length N.
@@ -12,4 +14,6 @@ merge back, and at most 2N for compares).
 
 <hr>
 
-<img src="./MergeBottomUp.png">
+**Bottom-up**
+
+<img src="/images/MergeBottomUp.png" width="500px">

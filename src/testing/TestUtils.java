@@ -29,12 +29,32 @@ public class TestUtils {
         }
     }
 
-    public static long simpleTest(Testable testable, int size, int range) {
+    public static long simpleTest(Testable testable, int size, int range, boolean print) {
         Random random = new Random();
         int[] arr = random.ints(size, -range, range).toArray();
 
         Stopwatch stopwatch = new Stopwatch();
         testable.test(arr);
+
+        if (print)
+            printArray(arr);
+
         return stopwatch.elapsedTime();
+    }
+
+    private static void printArray(int[] arr) {
+
+        StringBuilder builder = new StringBuilder();
+
+        for (int i = 0; i < arr.length; i++) {
+
+            if (i % 20 == 0)
+                builder.append('\n');
+
+            builder.append(arr[i]).append(' ');
+
+        }
+
+        System.out.println(builder);
     }
 }

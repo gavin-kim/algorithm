@@ -12,7 +12,7 @@ public class QuickSort {
         if (lo >= hi)
             return;
 
-        int pivotIndex = partitionMedianOf3(arr, lo, hi);
+        int pivotIndex = partition(arr, lo, hi);
         quickSort(arr, lo, pivotIndex - 1);
         quickSort(arr, pivotIndex + 1, hi);
     }
@@ -31,25 +31,29 @@ public class QuickSort {
         quickSortMedian3(arr, pivotIndex + 1, hi);
     }
 
-
+    // compare left, center and right then partition with pivot(median)
     private static int partitionMedianOf3(int[] arr, int lo, int hi) {
 
-        int center = (lo + hi) / 2;
+        // the number of elements > 3
+        if (hi - lo > 2) {
+            int center = (lo + hi) / 2;
 
-        if (arr[lo] > arr[center])
-            swap(arr, lo, center);
+            if (arr[lo] > arr[center])
+                swap(arr, lo, center);
 
-        if (arr[lo] > arr[hi])
-            swap(arr, lo, hi);
+            if (arr[lo] > arr[hi])
+                swap(arr, lo, hi);
 
-        if (arr[center] > arr[hi])
-            swap(arr, center, hi);
+            if (arr[center] > arr[hi])
+                swap(arr, center, hi);
 
-        // switch center with arr[hi - 1] to use a pivot;
-        swap(arr, center, hi -1);
+            // swap center with arr[hi - 1] to use a pivot;
+            swap(arr, center, hi - 1);
 
-        // lo < center < hi
-        return partition(arr, lo + 1, hi - 1);
+            // lo < center < hi
+            return partition(arr, lo + 1, hi - 1);
+        } else
+            return partition(arr, lo, hi);
     }
 
 
