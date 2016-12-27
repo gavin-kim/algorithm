@@ -5,6 +5,5 @@ In a heap, A parent of node is in  position k, 2 children nodes are in position 
 The height of a complete binary tree of size N is [ log N ] and increases by 1 when N is a power of 2.</strong>
 
 <img src="/images/PriorityQueueRunningTimes.png">
-
 <img src="/images/HeapStructure.png">
 
