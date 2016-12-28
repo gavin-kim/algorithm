@@ -10,4 +10,5 @@ The height of a complete binary tree of size N is [ log N ] and increases by 1 w
 <img src="/images/HeapSwim.png">
 <img src="/images/HeapSink.png">
 <hr>
+<h3>NOTE: Swim and Sink are used to swap. Swaping always happens after complete the structure</h3>
 <img src="/images/HeapOperations.png">
