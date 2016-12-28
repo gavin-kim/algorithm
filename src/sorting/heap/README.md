@@ -6,5 +6,8 @@ The height of a complete binary tree of size N is [ log N ] and increases by 1 w
 
 <img src="/images/HeapStructure.png">
 <img src="/images/PriorityQueueRunningTimes.png">
-
-
+<hr>
+<img src="/images/HeapSwim.png">
+<img src="/images/HeapSink.png">
+<hr>
+<img src="/images/HeapOperations.png">
