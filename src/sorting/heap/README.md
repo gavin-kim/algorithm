@@ -1,4 +1,4 @@
-# Heap
+# Heap Sort
 <h3>HeapSort has poor cache performance: array entries are rarely compared with nearby array
 entries, so the number of cache misses is far higher than for quicksort, mergesort, and
 even shellsort, where most compares are with nearby entries.</h3>
