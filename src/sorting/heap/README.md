@@ -1,7 +1,8 @@
-# Heap Sort
+# Heap Sort 
 <h4>HeapSort has poor cache performance: array entries are rarely compared with nearby array
 entries, so the number of cache misses is far higher than for quicksort, mergesort, and
 even shellsort, where most compares are with nearby entries.</h4>
+
 <img src="/images/HeapSort.png">
 <hr>
 <h4>Heap always starts with index 1, Heap that has size N is filled with 1 ~ N elements. <br>
