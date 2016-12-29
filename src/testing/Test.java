@@ -1,13 +1,8 @@
 package testing;
 
-import sorting.merge.MergeSort;
-import sorting.quick.QuickSort;
+import sorting.heap.IndexMinPQ;
 
-
-import java.io.File;
 import java.io.IOException;
-import java.util.*;
-import java.util.stream.IntStream;
 
 public class Test {
 
@@ -17,7 +12,7 @@ public class Test {
     public static void main(String[] args) throws IOException{
 
 
-        Scanner input = new Scanner(new File("src/testing/data.txt"));
+/*        Scanner input = new Scanner(new File("src/testing/data.txt"));
 
         int n = input.nextInt();
         int p = input.nextInt();
@@ -38,15 +33,26 @@ public class Test {
             }
         }
 
-        System.out.println(notifications);
+        System.out.println(notifications);*/
 
-/*        Testable mergeTopDown = MergeSort::mergeSortTD;
-        Testable quickSort = QuickSort::quickSort;
-        Testable quickSortMedian3 = QuickSort::quickSortMedian3;
+        IndexMinPQ<Character> heap = new IndexMinPQ<>();
 
-        System.out.println(TestUtils.simpleTest(mergeTopDown, SIZE, RANGE , true));
-        System.out.println(TestUtils.simpleTest(quickSort, SIZE, RANGE, true));
-        System.out.println(TestUtils.simpleTest(quickSortMedian3, SIZE, RANGE, true));*/
+        heap.insert(3, 'P');
+        heap.insert(2, 'Q');
+        heap.insert(1, 'E');
+        //System.out.println("Removed: " + heap.removeMax());
+        System.out.println(heap);
+        heap.insert(5, 'X');
+        heap.insert(4, 'A');
+        heap.insert(6, 'M');
+        //System.out.println("Removed: " + heap.removeMax());
+        System.out.println(heap);
+        heap.insert(9, 'P');
+        heap.insert(7, 'L');
+        heap.insert(8, 'E');
+        //System.out.println("Removed: " + heap.removeMax());
+
+        System.out.println(heap);
 
     }
 
