@@ -43,6 +43,7 @@ public class MaxPQ<K extends Comparable<K>> {
         return max;
     }
 
+
     private void grow(int minCapacity) {
         int oldCapacity = queue.length;
         // Double size if small; else grow by 50%

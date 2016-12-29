@@ -1,59 +1,24 @@
 package testing;
 
-import sorting.heap.IndexMinPQ;
+import sorting.heap.HeapSort;
+import sorting.quick.QuickSort;
 
 import java.io.IOException;
 
 public class Test {
 
-    public static final int SIZE = 100;
-    public static final int RANGE = 100;
+    public static final int SIZE = 10000000;
+    public static final int RANGE = 10000;
 
     public static void main(String[] args) throws IOException{
 
+        Testable quickSortTest = QuickSort::quickSort;
+        Testable heapSortTest = HeapSort::heapSort;
 
-/*        Scanner input = new Scanner(new File("src/testing/data.txt"));
+        //System.out.println(TestUtils.simpleTest(heapSortTest, SIZE, RANGE, false));
+        //System.out.println(TestUtils.simpleTest(quickSortTest, SIZE, RANGE, false));
 
-        int n = input.nextInt();
-        int p = input.nextInt();
-
-        int notifications = 0;
-
-        int[] arr = new int[n];
-
-        for (int i = 0; i < n; i++) {
-            arr[i] = input.nextInt();
-
-            if (i >= p) {
-
-                // get sorted array [i-p..i-1] size p
-                int[] sortedArr = countingSort(arr, i - p, i, 200);
-                if (arr[i] >= getMedian(sortedArr))
-                    notifications++;
-            }
-        }
-
-        System.out.println(notifications);*/
-
-        IndexMinPQ<Character> heap = new IndexMinPQ<>();
-
-        heap.insert(3, 'P');
-        heap.insert(2, 'Q');
-        heap.insert(1, 'E');
-        //System.out.println("Removed: " + heap.removeMax());
-        System.out.println(heap);
-        heap.insert(5, 'X');
-        heap.insert(4, 'A');
-        heap.insert(6, 'M');
-        //System.out.println("Removed: " + heap.removeMax());
-        System.out.println(heap);
-        heap.insert(9, 'P');
-        heap.insert(7, 'L');
-        heap.insert(8, 'E');
-        //System.out.println("Removed: " + heap.removeMax());
-
-        System.out.println(heap);
-
+        TestUtils.doublingTest(quickSortTest, RANGE);
     }
 
     public static int[] countingSort(int[] arr, int lo, int hi, int range) {
