@@ -1,6 +1,8 @@
 package sorting.heap;
 
 
+import java.util.Comparator;
+
 public class HeapSort {
 
     public static void heapSort(int[] arr) {

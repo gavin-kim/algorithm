@@ -116,7 +116,7 @@ public class QuickSort {
             } else {                        // greater than
                 swap(arr, i , pHi);
                 pHi--;
-                // Do not increase index to compare changed value pivot
+                // Do not increase index to compare changed value with pivot
             }
         }
 

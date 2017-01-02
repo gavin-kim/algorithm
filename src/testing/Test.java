@@ -1,9 +1,9 @@
 package testing;
 
-import sorting.heap.HeapSort;
-import sorting.quick.QuickSort;
-
+import java.io.File;
 import java.io.IOException;
+import java.util.*;
+import java.util.stream.IntStream;
 
 public class Test {
 
@@ -12,55 +12,59 @@ public class Test {
 
     public static void main(String[] args) throws IOException{
 
-        Testable quickSortTest = QuickSort::quickSort;
-        Testable heapSortTest = HeapSort::heapSort;
+        Scanner input = new Scanner(new File("resources/data/data.txt"));
+        int count = 0;
 
-        //System.out.println(TestUtils.simpleTest(heapSortTest, SIZE, RANGE, false));
-        //System.out.println(TestUtils.simpleTest(quickSortTest, SIZE, RANGE, false));
+        int len = input.nextInt();
+        int p = input.nextInt();
 
-        TestUtils.doublingTest(quickSortTest, RANGE);
-    }
+        int[] arr = new int[len];
+        int[] counts = new int[201];
 
-    public static int[] countingSort(int[] arr, int lo, int hi, int range) {
+        LinkedList<Integer> queue = new LinkedList<>();
 
-        int[] counts = new int[range];
-        int[] newArr = new int[hi - lo];
 
-        for (int i = lo; i < hi; i++)
+        for (int i = 0; i < len; i++) {
+            arr[i] = input.nextInt();
+
+
+            if (i >= p && arr[i] >= getMedian(counts, p))
+                count++;
+
+            queue.addLast(arr[i]);
             counts[arr[i]]++;
 
-        for (int i = 0; i < counts.length - 1; i++)
-            counts[i + 1] += counts[i];
+            if (queue.size() > p)
+                counts[queue.poll()]--;
 
-        for (int i = hi - 1; i >= lo; i--)
-            newArr[--counts[arr[i]]] = arr[i];
 
-        return newArr;
+        }
+        System.out.println(count);
     }
 
-    public static int insert(int[] arr, int i, int v) {
 
-        while (i > 0 && arr[i - 1] > v) {
-            arr[i] = arr[i - 1];
-            i--;
+    public static int getMedian(int[] counts, int p) {
+
+        int center = p / 2;
+        int i = 0;
+        int sum = counts[0];
+        int range = 0;
+
+        // sum <= center < next sum
+        while (i < counts.length - 1 && sum <= center) {
+            range = center - sum;
+            sum += counts[++i];
         }
 
-        while (i < arr.length - 1 && arr[i + 1] < v) {
-            arr[i] = arr[i + 1];
-            i++;
+        System.out.println(range);
+
+        if (p % 2 == 0 && range < 1) {
+
+            int median = i;
+            while (counts[--i] == 0);
+            return median + i;
         }
-
-        arr[i] = v;
-        return i;
-    }
-
-    public static int getMedian(int[] arr) {
-
-        int center = arr.length / 2;
-
-        if (arr.length % 2 == 0) // even
-            return (arr[center - 1] + arr[center]);
         else
-            return arr[center] * 2;
+            return i * 2;
     }
 }
