@@ -7,7 +7,7 @@
 A comparison sort algorithm cannot beat <strong><i>n * log(n)</i></strong> (worst-case) running time, since <strong><i>n * log(n)</i></strong> represents the minimum number of comparisons needed to know where to place each element.
 <hr>
 
-<img src="/images/CharacteristicSortingAlgorithm.png" width="400px" height="400px">
+<img src="/images/SortingAlgorithms.png" width="400px" height="400px">
 <img src="/images/RecursionTree.png" width="400px" height="400px">
 <img src="/images/RecursiveDivideAndConquer.jpg" width="400px" height="400px">
 <hr>
