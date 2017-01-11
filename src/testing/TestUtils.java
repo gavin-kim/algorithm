@@ -1,6 +1,5 @@
 package testing;
 
-import javafx.scene.paint.Stop;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,9 +31,9 @@ public class TestUtils {
         }
     }
 
-    public static long simpleTest(Testable testable, int size, int range, boolean print) {
+    public static long simpleTest(Testable testable, int arraySize, int range, boolean print) {
         Random random = new Random();
-        int[] arr = random.ints(size, -range, range).toArray();
+        int[] arr = random.ints(arraySize, -range, range).toArray();
 
         Stopwatch stopwatch = new Stopwatch();
         testable.test(arr);
@@ -60,6 +59,4 @@ public class TestUtils {
 
         System.out.println(builder);
     }
-
-
 }

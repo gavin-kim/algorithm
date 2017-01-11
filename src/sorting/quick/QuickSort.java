@@ -57,7 +57,7 @@ public class QuickSort {
     }
 
 
-    private static int partition(int[] arr, int lo, int hi)
+    public static int partition(int[] arr, int lo, int hi)
     {
 
         int left = lo, right = hi - 1; // left and right scan indices
