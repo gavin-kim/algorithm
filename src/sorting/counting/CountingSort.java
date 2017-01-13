@@ -6,27 +6,27 @@ import java.util.*;
 public class CountingSort {
 
 
-    public static int[] countingSort(int[] arr, int k) {
+    public static int[] countingSort(int[] arr, int maxVal) {
 
         // array to count
-        int[] countOcc = new int[k];
+        int[] countOccur = new int[maxVal+ 1];
 
         // array to store sorted values
         int[] sortedArr = new int[arr.length];
 
         // count occurrence
         for (int i = 0; i < arr.length; i++) {
-            countOcc[arr[i]]++;
+            countOccur[arr[i]]++;
         }
 
         // add counted occurrence
-        for (int i = 1; i < k; i++) {
-            countOcc[i] += countOcc[i - 1];
+        for (int i = 1; i < maxVal; i++) {
+            countOccur[i] += countOccur[i - 1];
         }
 
         // create a sorted array
-        for (int i = 0; i < arr.length; i++) {
-            sortedArr[--countOcc[arr[i]]] = arr[i];
+        for (int i = arr.length - 1; i >= 0; i++) {
+            sortedArr[--countOccur[arr[i]]] = arr[i];
         }
 
         return sortedArr;

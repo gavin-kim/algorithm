@@ -180,6 +180,36 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
         return element;
     }
 
+    public static void insertionSort(PositionalList<Comparable> list) {
+
+        // sorted[0 1 walk 3 4... marker] ~ pivot ~ unsorted[... n]
+        // marker: to check first to last instead of index
+        // pivot: compare target
+        // walk: to check searching position
+
+        Position<Comparable> marker = list.first();
+
+        while (marker != list.last()) {
+            Position<Comparable> pivot = list.after(marker);
+            Comparable value = pivot.getElement();
+
+            if (value.compareTo(pivot.getElement()) > 0)
+                marker = pivot;
+            else {
+
+                Position<Comparable> walk = marker;
+
+                // find leftmost: LinkedList doesn't need to move, just remember walk point
+                while (list.first() != walk && marker.getElement().compareTo(value) > 0)
+                    walk = list.before(walk);
+
+                list.remove(pivot);
+                list.addBefore(walk, value);
+            }
+
+        }
+    }
+
     public Iterable<Position<E>> positions() {
         return PositionIterator::new; // iterable interface (lambda)
     }
