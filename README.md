@@ -1,7 +1,7 @@
 #Algorithm
 
 <h4>
-In industry, People merge Big theta and Big O together. Industry's meaning of `big O` is `big theta`<br>
+In industry, People merge Big theta and Big O together. Industry's meaning of Big O = Big theta<br>
 There is NO relationship between best/worst/expected case and big 0/theta/omega
 </h4>
 
