@@ -1,7 +1,7 @@
 #Algorithm
 
 <h4>
-In industry, People merge Big theta and Big O together. Industry's meaning of Big O is Big theta<br>
+Industry's meaning of Big O is Big theta<br>
 There is NO relationship between best/worst/expected case and big 0/theta/omega<br><br>
 Best, worst, and expected cases describe the big O (or big theta) time for particular inputs or scenarios.<br>
 Big O, big omega, and big theta describe the upper, lower, and tight bounds for the runtime.
