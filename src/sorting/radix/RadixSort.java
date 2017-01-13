@@ -10,7 +10,7 @@ public class RadixSort {
      * @param d the number of bits for counting sort each time
      * @return sorted array
      */
-    int[] radixSort(int[] arr, int w, int d) {
+    public static int[] radixSort(int[] arr, int w, int d) {
         int[] output = null;
         int numOfCountingSort = w / d;
         int range = 1 << d;            // 0 ~ 2^d: a range of integers to count each time
