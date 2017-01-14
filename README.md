@@ -11,5 +11,4 @@ Big O, big omega, and big theta describe the upper, lower, and tight bounds for 
 `Big theta: both O and omega. An algorithm is 0(N) if it is both Big O(N) and Big omega(N). 0 gives a tight bound on runtime.`<br>
 `Industry's meaning of Big O is Big theta` <br>
 
-
 <img src="./images/AnalysisAlgorithm.png" width="500px">
