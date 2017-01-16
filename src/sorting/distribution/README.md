@@ -6,7 +6,7 @@
 <ul>
 <li>Counting: buckets hold only a single value</li>
 <li>Bucket:   buckets hold a range of values </li>
-<li>Radix:    buckets hold values based on digits within their values 
+<li>Radix:    buckets hold values based on digits within their values<br> 
               (w = the number of bits for max value in the array,
                d = the number of bits to be used for counting sort each time)</li>
 </ul>
