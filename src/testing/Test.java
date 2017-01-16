@@ -1,19 +1,16 @@
 package testing;
 
-import sorting.radix.RadixSort;
-
-import java.awt.*;
-import java.io.*;
-import java.util.*;
+import sorting.basicsorts.BasicSorts;
 
 public class Test {
     public static void main(String[] args) {
-        int[] arr = new Random().ints(100000, 0, 10000).toArray();
+        Testable insertion = BasicSorts::insertionSort;
+        Testable bubble = BasicSorts::bubbleSort;
+        Testable selection = BasicSorts::selectionSort;
 
-        int[] sorted = RadixSort.radixSort(arr, 32, 4);
-
-        for (int i : sorted)
-            System.out.println(i);
+        System.out.println(TestUtils.simpleTest(insertion, 100000, 1000000, false));
+        System.out.println(TestUtils.simpleTest(bubble, 100000, 1000000, false));
+        System.out.println(TestUtils.simpleTest(selection, 100000, 1000000, false));
     }
 }
 
