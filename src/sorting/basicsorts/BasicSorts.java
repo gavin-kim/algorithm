@@ -3,8 +3,9 @@ package sorting.basicsorts;
 public class BasicSorts {
 
     /**
-     *  O(n*n): compares
-     *  O(n): swaps
+     * Stable
+     * O(n*n): compares
+     * O(n): swaps
      */
     public static void insertionSort(int[] arr) {
 
@@ -21,7 +22,8 @@ public class BasicSorts {
     }
 
     /**
-     *  O(n*n): compares and swaps
+     * Unstable
+     * O(n*n): compares and swaps
      */
     public static void bubbleSort(int[] arr) {
 
@@ -34,6 +36,7 @@ public class BasicSorts {
     }
 
     /**
+     *  Unstable
      *  O(n*n): compares
      *  O(n)  : swaps
      */

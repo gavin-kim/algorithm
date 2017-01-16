@@ -3,12 +3,17 @@ package sorting.quick;
 
 public class QuickSort {
 
-    // in-place quicksort
+    /**
+     * Quick sort
+     *
+     * Unstable, In-place
+     * I usually has better performance than Merge sort
+     */
     public static void quickSort(int[] arr) {
         quickSort(arr, 0, arr.length - 1);
     }
 
-    public static void quickSort(int[] arr, int lo, int hi) {
+    private static void quickSort(int[] arr, int lo, int hi) {
         if (lo >= hi)
             return;
 
@@ -17,7 +22,40 @@ public class QuickSort {
         quickSort(arr, pivotIndex + 1, hi);
     }
 
-    // in-place quicksort with median of 3
+    public static int partition(int[] arr, int lo, int hi)
+    {
+
+        int left = lo, right = hi - 1; // left and right scan indices
+        int pivot = arr[hi];           // pivot
+
+        while (true) {
+            // scan from left first: stop at element >= pivot
+            while (left <= right && arr[left] < pivot)
+                left++;
+
+            // scan from right
+            while (left <= right && arr[right] > pivot)
+                right--;
+
+            // scan complete
+            if (left > right)
+                break;
+
+            // switch when left and right are equal to pivot always switch
+            swap(arr, left, right);
+            left++;
+            right--; // it's necessary in case values equal to pivot
+        }
+
+        arr[hi] = arr[left];
+        arr[left] = pivot; // Put pivot into a[left] because it scans left first
+        return left; // return left because left search is the first
+    }
+
+    /**
+     * Quick sort with Median of 3
+     * (sort first, middle, last at the first time to avoid the worst case)
+     */
     public static void quickSortMedian3(int[] arr) {
         quickSortMedian3(arr, 0, arr.length - 1);
     }
@@ -31,7 +69,9 @@ public class QuickSort {
         quickSortMedian3(arr, pivotIndex + 1, hi);
     }
 
-    // compare left, center and right then partition with pivot(median)
+    /**
+     * compare left, center and right then partition with pivot(median)
+     */
     private static int partitionMedianOf3(int[] arr, int lo, int hi) {
 
         // the number of elements > 3
@@ -56,43 +96,17 @@ public class QuickSort {
             return partition(arr, lo, hi);
     }
 
-
-    public static int partition(int[] arr, int lo, int hi)
-    {
-
-        int left = lo, right = hi - 1; // left and right scan indices
-        int pivot = arr[hi];           // pivot
-
-        while (true) {
-            // scan left first: stop at element >= pivot
-            while (left <= right && arr[left] < pivot)
-                left++;
-
-            // scan right
-            while (left <= right && arr[right] > pivot)
-                right--;
-
-            // scan complete
-            if (left > right)
-                break;
-
-            // switch when left and right are equal to pivot always switch
-            swap(arr, left, right);
-            left++;
-            right--; // it's necessary in case values equal to pivot
-        }
-
-        arr[hi] = arr[left];
-        arr[left] = pivot; // Put pivot into a[left] because it scans left first
-        return left;
+    /**
+     * Quick3 sort (with 3-way partitioning to partition equal values)
+     *
+     * Unstable
+     * Better performance when many values are duplicate (pivot is range)
+     */
+    public static void quick3Sort(int[] arr) {
+        quick3Partition(arr, 0, arr.length - 1);
     }
 
-    // quicksort with 3-way partitioning (to partition equal values)
-    public static void quickSort3(int[] arr) {
-        quickSort3(arr, 0, arr.length - 1);
-    }
-
-    private static void quickSort3(int[] arr, int lo, int hi) {
+    private static void quick3Partition(int[] arr, int lo, int hi) {
 
         if (lo >= hi)
             return;
@@ -120,8 +134,8 @@ public class QuickSort {
             }
         }
 
-        quickSort3(arr, lo, pLo - 1);
-        quickSort3(arr, pHi + 1, hi);
+        quick3Partition(arr, lo, pLo - 1);
+        quick3Partition(arr, pHi + 1, hi);
     }
 
     private static void swap(int[] arr, int a, int b) {

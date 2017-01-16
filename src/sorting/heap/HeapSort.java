@@ -5,6 +5,13 @@ import java.util.Comparator;
 
 public class HeapSort {
 
+    /**
+     * Unstable
+     * runtime: O(n log n)
+     *
+     * It has O(n log n) time complexity but usually slower than quick or merge
+     * It need heap structure to sort (input array must be heapified)
+     */
     public static void heapSort(int[] arr) {
         int size = arr.length - 1;
 

@@ -1,11 +1,13 @@
-package sorting.counting;
+package sorting.distribution;
 
-import java.io.*;
-import java.util.*;
+
 
 public class CountingSort {
 
-
+    /**
+     * Stable
+     * runtime: O(n)
+     */
     public static int[] countingSort(int[] arr, int maxVal) {
 
         // array to count

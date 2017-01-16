@@ -1,5 +1,10 @@
 package sorting.merge;
 
+/**
+ * Stable
+ * runtime: O(n log n)
+ * extra space: O(n)
+ */
 
 public class MergeSort {
 
