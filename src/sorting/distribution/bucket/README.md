@@ -12,7 +12,7 @@
  * k: number of buckets (stable sort: insertion or merge)
  
    min                       max
- *  {[   ][   ]=> bucket size } => range
+ *  {[...][...]=> bucket size } => range
  
  * range: max - min
  * range / bucket size: the number of buckets (last index of bucket[])
