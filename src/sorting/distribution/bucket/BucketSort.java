@@ -1,4 +1,4 @@
-package sorting.distribution;
+package sorting.distribution.bucket;
 
 import sorting.basicsorts.BasicSorts;
 
@@ -9,14 +9,6 @@ import java.util.List;
 public class BucketSort {
 
     private static final int DEFAULT_BUCKET_SIZE = 10;
-
-    /**
-     * Counting: buckets hold only a single value
-     * Bucket:   buckets hold a range of values
-     * Radix:    buckets hold values based on digits within their values
-     *           (w = the number of bits for max value in the array,
-     *            d = the number of bits to be used for counting sort each time)
-     */
 
     /**
      * Bucket sort

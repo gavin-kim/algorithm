@@ -1,4 +1,4 @@
-package sorting.distribution;
+package sorting.distribution.radix;
 
 public class RadixSort {
 

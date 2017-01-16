@@ -1,8 +1,8 @@
 package testing;
 
-import sorting.distribution.CountingSort;
-import sorting.distribution.BucketSort;
-import sorting.distribution.RadixSort;
+import sorting.distribution.counting.CountingSort;
+import sorting.distribution.bucket.BucketSort;
+import sorting.distribution.radix.RadixSort;
 
 public class Test {
 
