@@ -12,4 +12,5 @@ Big O, big omega, and big theta describe the upper, lower, and tight bounds for 
 `Industry's meaning of Big O is Big theta` <br>
 
 <img src="./images/AnalysisAlgorithm.png" width="500px">
-<object type="application/pdf" data="/resources/BigOCheatsheet.pdf" width="90%" height="90%"></object>
+<a href='/resources/BigOCheatsheet.pdf' class='pdf'><img src='/resources/BigOCheatsheet.pdf' width='500'></a>
+
