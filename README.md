@@ -13,6 +13,6 @@ Big O, big omega, and big theta describe the upper, lower, and tight bounds for 
 
 <img src="./images/AnalysisAlgorithm.png" width="500px">
 
-<iframe src="http://docs.google.com/gview?url=https://github.com/kyk0704/algorithm/blob/master/resources/BigOCheatsheet.pdf&embedded=true" style="width:718px; height:700px;" frameborder="0"></iframe>
+<embed src="/resources/BigOCheatsheet.pdf" width="500" height="375" type='application/pdf'>
 
 
