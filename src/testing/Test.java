@@ -4,8 +4,11 @@ import sorting.distribution.counting.CountingSort;
 import sorting.distribution.bucket.BucketSort;
 import sorting.distribution.radix.RadixSort;
 
+import java.util.Random;
+
 public class Test {
 
+    private static final int ARRAY_SIZE = 1000000;
     private static final int RANGE = 10000;
     private static final int BUCKET_SIZE = 10;
     private static final int RADIX_SIZE = 10;
@@ -13,15 +16,17 @@ public class Test {
 
     public static void main(String[] args) {
 
-        Testable counting = (arr) -> CountingSort.countingSort(arr, RANGE);
+        int[] array = new Random().ints(ARRAY_SIZE, 0, RANGE).toArray();
+
+        Testable counting = (arr) -> CountingSort.countingSort(array, RANGE);
         Testable bucket = (arr) -> BucketSort.bucketSort(arr, 10);
         Testable radix = (arr) -> RadixSort.radixSort(arr, getLengthOfBinary(RANGE), 4);
 
 
+        System.out.println(TestUtils.simpleTest(counting, 100000, 1000000, false));
 
-
-        //System.out.println(TestUtils.simpleTest(bucket, 100000, 1000000, true));
-        System.out.println(getLengthOfBinary(7));
+        for (int v : array)
+            System.out.println(v);
     }
 
     public static int getLengthOfBinary(int v) {

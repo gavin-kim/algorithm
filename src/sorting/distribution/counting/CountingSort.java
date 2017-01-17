@@ -8,7 +8,7 @@ public class CountingSort {
      * Stable
      * runtime: O(n)
      */
-    public static int[] countingSort(int[] arr, int maxVal) {
+    public static void countingSort(int[] arr, int maxVal) {
 
         // array to count
         int[] countOccur = new int[maxVal+ 1];
@@ -22,16 +22,16 @@ public class CountingSort {
         }
 
         // add counted occurrence
-        for (int i = 1; i < maxVal; i++) {
+        for (int i = 1; i < countOccur.length; i++) {
             countOccur[i] += countOccur[i - 1];
         }
 
         // create a sorted array
-        for (int i = arr.length - 1; i >= 0; i++) {
+        for (int i = arr.length - 1; i >= 0; i--) {
             sortedArr[--countOccur[arr[i]]] = arr[i];
         }
 
-        return sortedArr;
+        System.arraycopy(sortedArr, 0, arr, 0, arr.length);
     }
 
 
