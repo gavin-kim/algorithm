@@ -31,9 +31,9 @@ public class TestUtils {
         }
     }
 
-    public static long simpleTest(Testable testable, int arraySize, int range, boolean print) {
+    public static long runningTimeTest(Testable testable, int arraySize, int range, boolean print) {
         Random random = new Random();
-        int[] arr = random.ints(arraySize, -range, range).toArray();
+        int[] arr = random.ints(arraySize, 0, range).toArray();
 
         Stopwatch stopwatch = new Stopwatch();
         testable.test(arr);
