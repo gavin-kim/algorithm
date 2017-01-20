@@ -22,7 +22,7 @@ public class Test {
 
     public static void main(String[] args) {
 
-        File file = new File("resources/data/tinyEWD.txt");
+        File file = new File("resources/data/10000EWD.txt");
         UndirectedGraph<Integer> graph = new UndirectedGraph<>(file);
         GST gstFromDfs = graph.dfs(0);
         GST gstFromBfs = graph.bfs(0);
