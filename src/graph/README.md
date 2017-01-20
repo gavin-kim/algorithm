@@ -5,7 +5,7 @@
 <li>Finding a path between two vertices.</li>
 <li>Checking whether all vertex is connected in the graph.</li>
 <li>Finding a cycle in the graph</li>
-<ol>
+</ol>
 <strong>Application of the DFS</strong><br>
 <ol>
 <li>1. Finding a Hamiltonian path (Hamiltonian path is a path that visits each vertex exactly once)</li>
