@@ -16,4 +16,4 @@
 <li>Checking whether a graph is bipartite (A bipartite graph is a graph whose vertices can be divided into 2 sets)</li>
 </ol>
 
-<img src="/images/BipartiteGraph.png">
+<img width="100px" height="66px" src="/images/BipartiteGraph.png">
