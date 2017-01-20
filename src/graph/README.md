@@ -8,14 +8,14 @@
 </ol>
 <strong>Application of the DFS</strong><br>
 <ol>
-<li>Finding a Hamiltonian path (Hamiltonian path is a path that visits each vertex exactly once)
+<li>Finding a Hamiltonian path (Hamiltonian path is a path that visits each vertex exactly once)<br>
     <img width="120px" height="80px" src="/images/HamiltonianPath.png">
 </li>
 </ol>
 <strong>Application of the BFS</strong><br>
 <ol>
 <li>Finding a shortest path between two vertices.</li>
-<li>Checking whether a graph is bipartite (A bipartite graph is a graph whose vertices can be divided into 2 sets)
+<li>Checking whether a graph is bipartite (A bipartite graph is a graph whose vertices can be divided into 2 sets)<br>
     <img width="120px" height="80px" src="/images/BipartiteGraph.png">
 </li>
 </ol>
