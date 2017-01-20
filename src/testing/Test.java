@@ -1,6 +1,7 @@
 package testing;
 
 import com.sun.javaws.util.JavawsConsoleController;
+import graph.GST;
 import graph.UndirectedGraph;
 import structure.tree.BST;
 
@@ -21,10 +22,19 @@ public class Test {
 
     public static void main(String[] args) {
 
+        File file = new File("resources/data/tinyEWD.txt");
+        UndirectedGraph<Integer> graph = new UndirectedGraph<>(file);
+        GST gstFromDfs = graph.dfs(0);
+        GST gstFromBfs = graph.bfs(0);
 
-        Arrays.sor
 
+        for(int v : gstFromDfs.getSearchOrder())
+            System.out.print(v + " ");
 
+        System.out.println();
+
+        for(int v : gstFromBfs.getSearchOrder())
+            System.out.print(v + " ");
     }
 
 
@@ -39,8 +49,6 @@ public class Test {
         bst.put("E", "E");
         bst.put("I", "I");
         bst.put("H", "H");
-
-
 
         System.out.println(bst.size());
 

@@ -111,7 +111,7 @@ public class QuickSort {
         if (lo >= hi)
             return;
 
-        int pivot = arr[lo];
+        int pivot = arr[lo]; // store pivot to another variable
         int pLo = lo;    // less than [lo..pLo-1]
         int pHi = hi;    // greater than [pHi+1..hi]
         int i = lo + 1;  // index to compare

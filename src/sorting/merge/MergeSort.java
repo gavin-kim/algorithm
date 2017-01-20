@@ -37,7 +37,7 @@ public class MergeSort {
         // size: 1  (1:1) ... (1:1) ...
         // size: 2  (2:2) ... (2:2) ...
         for (int size = 1; size < n; size *= 2) {    // size: subarray size  (1, 2, 4, 8 ....)
-            for (int i = 0; i < n; i += size * 2) {  // i:    subarray index
+            for (int i = 0; i < n - size; i += size * 2) {  // i:    subarray index
                 merge(arr, aux, i, i + size - 1 , Math.min(i + size * 2, n) - 1);
             }
         }
