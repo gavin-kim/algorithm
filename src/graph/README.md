@@ -13,7 +13,9 @@
 <strong>Application of the BFS</strong><br>
 <ol>
 <li>Finding a shortest path between two vertices.</li>
-<li>Checking whether a graph is bipartite (A bipartite graph is a graph whose vertices can be divided into 2 sets)</li>
+<li>Checking whether a graph is bipartite (A bipartite graph is a graph whose vertices can be divided into 2 sets)
+    <img width="100px" height="66px" src="/images/BipartiteGraph.png">
+</li>
 </ol>
 
-<img width="100px" height="66px" src="/images/BipartiteGraph.png">
+
