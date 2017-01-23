@@ -29,13 +29,13 @@ public class RadixSort {
             // counting sort
             output = new int[arr.length];
 
-            for (int i = 0; i < arr.length; i++) // count occurrence
+            for (int i = 0; i < arr.length; i++) // count occurrence O(n)
                 countingArr[(arr[i] >> r * p) & (range - 1)]++; // bit & operation in a specific range
 
-            for (int i = 1; i < range; i++)
+            for (int i = 1; i < range; i++)      // O (2^r)
                 countingArr[i] += countingArr[i - 1];
 
-            for (int i = arr.length - 1; i >= 0; i--)
+            for (int i = arr.length - 1; i >= 0; i--) // O(n)
                 output[--countingArr[arr[i] >> r * p & (range - 1)]] = arr[i];
 
             arr = output; // store the result and use it next time

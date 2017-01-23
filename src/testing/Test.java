@@ -6,10 +6,13 @@ import graph.UndirectedGraph;
 import structure.tree.BST;
 
 import java.io.File;
+import java.io.InputStream;
 import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryMXBean;
 import java.lang.management.MemoryUsage;
-import java.util.Random;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 
 public class Test {
@@ -23,18 +26,46 @@ public class Test {
     public static void main(String[] args) {
 
         File file = new File("resources/data/10000EWD.txt");
-        UndirectedGraph<Integer> graph = new UndirectedGraph<>(file);
-        GST gstFromDfs = graph.dfs(0);
-        GST gstFromBfs = graph.bfs(0);
+        int[] arr = new Random().ints(ARRAY_SIZE, 0, RANGE).toArray();
+
+        arr = countingSort(arr, RANGE);
+
+        for (int v : arr)
+            System.out.println(v);
+    }
 
 
-        for(int v : gstFromDfs.getSearchOrder())
-            System.out.print(v + " ");
+    public static int[] countingSort(int[] arr, int maxVal) {
 
-        System.out.println();
+        int[] countValues = new int[maxVal + 1];
+        int len = arr.length;
+        int[] sortedArr = new int[len];
 
-        for(int v : gstFromBfs.getSearchOrder())
-            System.out.print(v + " ");
+        for (int value : arr)
+            countValues[value]++;
+
+        for (int i = 1; i < countValues.length; i++)
+            countValues[i] += countValues[i - 1];
+
+        for (int i = 0; i < len; i++) {
+            sortedArr[--countValues[arr[i]]] = arr[i];
+        }
+
+        return sortedArr;
+    }
+
+    public static int[] radixSort(int[] arr, int maxVal, int r) {
+        int[] sortedArr = null;
+        int numOfCountingSort = maxVal / r;
+        int range = 1 << r;
+
+
+        for (int p = 0; p < numOfCountingSort; p++) {
+            int[] countArr = new int[range];
+
+            sortedArr = new int[arr.length];
+
+        }
     }
 
 
