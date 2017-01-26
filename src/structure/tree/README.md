@@ -14,9 +14,9 @@
 
 ## Range
         while (node != null) {
-            if (low <= node <= high) list.add(node) 
-            if (node > low) stack(node.left);   
-            if (node < high) stack(node.right);
+            if (low <= node.key <= high) list.add(node) 
+            if (node.key > low) stack(node.left);   
+            if (node.key < high) stack(node.right);
             node = stack.pop();
         }
 ![Range](/images/BST.range.png)
