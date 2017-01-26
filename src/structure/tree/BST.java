@@ -154,22 +154,23 @@ public class BST<K extends Comparable<K>, V> {
         }
     }
 
-    // index starts from 0
+    // find a key associated with the index (index starts from 0)
     public K select(int index) {
         return select(root, index).key;
     }
 
+    // node index : size - rightSize - 1
     private Node select(Node node, int index) {
         // Return Node containing key of index
         if (node == null)
             return null;
 
-        int leftSize = size(node.left);
+        int leftSize = size(node.left); // index of current node is left size
 
-        if (leftSize > index)       // index is smaller
+        if (index < leftSize)       // index is less
             return select(node.left, index);
-        else if (leftSize < index)  // index is bigger (index - leftSize - 1(current))
-            return select(node.right, index - leftSize - 1);
+        else if (index > leftSize)  // index is greater (index - leftSize - 1(current))
+            return select(node.right, index - leftSize - 1); // subtract size of (left + current)
         else
             return node; // find a node
     }
@@ -230,12 +231,13 @@ public class BST<K extends Comparable<K>, V> {
             node.right = delete(node.right, key);
         // find a key
         else {
-            // if one of children is null return a child that is not null
+            // Case 1: 0 or 1 child
             if (node.right == null)
                 return node.left;
             else if (node.left == null)
                 return node.right;
 
+            // Case 2: 2 children
             Node removedNode = node;
             node = min(node.right); // find minimum key in the right subtree
             node.right = deleteMin(removedNode.right); // delete a node
