@@ -2,7 +2,8 @@
 
 ## Delete
 
-    <= 1 child or == 2 children 
+    Case1: The node has a child or no child.
+    Case2: The node has 2 children.
 ![Delete the minimum](/images/BST.delete.png) 
 ![Delete a key](/images/BST.delete2.png)
 
