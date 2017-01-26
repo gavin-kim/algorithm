@@ -7,6 +7,5 @@ A comparison sort algorithm cannot beat <strong><i>n * log(n)</i></strong> (wors
 
 <img src="/images/SortingAlgorithms.png" width="400px" height="400px">
 <img src="/images/RecursionTree.png" width="400px" height="400px">
-<img src="/images/RecursiveDivideAndConquer.jpg" width="400px" height="400px">
 <hr>
 

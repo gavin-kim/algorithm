@@ -22,18 +22,17 @@ public class QuickSort {
         quickSort(arr, pivotIndex + 1, hi);
     }
 
-    public static int partition(int[] arr, int lo, int hi)
-    {
+    public static int partition(int[] arr, int left, int right) {
 
-        int left = lo, right = hi - 1; // left and right scan indices
-        int pivot = arr[hi];           // pivot
+        int pivot = arr[right]; // pivot
+        int p = right--;        // right is pivot (right starts from right - 1)
 
         while (true) {
-            // scan from left first: stop at element >= pivot
+            // find greater than or equals to pivot
             while (left <= right && arr[left] < pivot)
                 left++;
 
-            // scan from right
+            // find less than or equals to pivot
             while (left <= right && arr[right] > pivot)
                 right--;
 
@@ -47,7 +46,8 @@ public class QuickSort {
             right--; // it's necessary in case values equal to pivot
         }
 
-        arr[hi] = arr[left];
+        // swap pivot with left
+        arr[p] = arr[left];
         arr[left] = pivot; // Put pivot into a[left] because it scans left first
         return left; // return left because left search is the first
     }
@@ -112,30 +112,47 @@ public class QuickSort {
             return;
 
         int pivot = arr[lo]; // store pivot to another variable
-        int pLo = lo;    // less than [lo..pLo-1]
-        int pHi = hi;    // greater than [pHi+1..hi]
-        int i = lo + 1;  // index to compare
+        int less = lo;       // less than [lo..left-1]
+        int great = hi;      // greater than [right+1..hi]
+        int i = lo + 1;      // index to compare
 
-        // [lo..pLo-1]: less
-        // [pLo..i-1]:  the range of values that equal to pivot
-        // [i..pHi]:    not compared yet
-        // [pHi+1..hi]: greater
-        while (i <= pHi) {
-            if (arr[i] < pivot) {           // less then
-                swap(arr, i, pLo);
-                pLo++;
-                i++; // pLo == pivot, no need to compare
-            } else if (arr[i] == pivot) {   // equals to [pLo..pHi] = pivot
-                i++; // pLo ~ i-1 == equals to pivot
+        /*
+         * Partitioning:
+         *
+         *   left part    center part    not searched yet    right part
+         * +----------------------------------------------------------+
+         * |  < pivot1  |  == pivot  |           ?          | > pivot |
+         * +----------------------------------------------------------+
+         *              ^                        ^          ^
+         *              |                        |          |
+         *             less                      i        great
+         *
+         * Invariants:
+         *
+         *              all in (lo ~~ less - 1)  < pivot
+         *              all in [less ~~~ great) == pivot
+         *              all in (great + 1 ~ hi)  > pivot
+         *
+         * Pointer k is the first index of ?-part.
+         */
+
+        while (i <= great) {
+            if (arr[i] < pivot) {           // less than
+                swap(arr, i, less);
+                less++;
+                i++; // less == pivot, no need to compare
+            } else if (arr[i] == pivot) {   // equals to [less..great] = pivot
+                i++; // less ~ i-1 == equals to pivot
             } else {                        // greater than
-                swap(arr, i , pHi);
-                pHi--;
+                swap(arr, i , great);
+                great--;
                 // Do not increase index to compare changed value with pivot
             }
+
         }
 
-        quick3Partition(arr, lo, pLo - 1);
-        quick3Partition(arr, pHi + 1, hi);
+        quick3Partition(arr, lo, less - 1);
+        quick3Partition(arr, great + 1, hi);
     }
 
     private static void swap(int[] arr, int a, int b) {

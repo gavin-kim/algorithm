@@ -323,21 +323,21 @@ public class BST<K extends Comparable<K>, V> {
         List<K> list = new ArrayList<>();
 
         Node node = root;
-        Node lastPop = null;
+        Node lastPop = null; // need to check the last pop
 
         while (!stack.isEmpty() || node != null) {
             if (node != null) {
                 stack.push(node);
                 node = node.left;
-            } else {
-                // current node is null
-                Node peekNode = stack.peek();
+            } else {  // current node is null
 
                 //          peekNode
                 //           /  \
                 //        left  right
                 //
                 // peekNode has right child and lastPop is not from the right
+                Node peekNode = stack.peek();
+
                 if (peekNode.right != null && peekNode.right != lastPop)
                     node = peekNode.right;   // only change node here
                 else {

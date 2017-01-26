@@ -22,7 +22,7 @@ public class TestUtils {
 
             Stopwatch stopwatch = new Stopwatch();
             testable.test(arr);
-            long time = stopwatch.elapsedTime();
+            long time = stopwatch.getNanoSeconds();
 
             System.out.printf("%12d %12d %10d %10.2f%%%n", size, time,
                 time - lastTime, (double)time / lastTime * 100);
@@ -41,10 +41,10 @@ public class TestUtils {
         if (print)
             printArray(arr);
 
-        return stopwatch.elapsedTime();
+        return stopwatch.getNanoSeconds();
     }
 
-    private static void printArray(int[] arr) {
+    public static void printArray(int[] arr) {
 
         StringBuilder builder = new StringBuilder();
 
