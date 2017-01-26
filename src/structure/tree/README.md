@@ -1,6 +1,6 @@
 # Binary Search Tree
 
-[[/images/BST.delete.png|alt=aa]]
+![Delete the minimum][/images/BST.delete.png]
 BST.delete2.png
 BST.floor.png
 BST.select.png
