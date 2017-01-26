@@ -8,7 +8,6 @@
 ![Delete a key](/images/BST.delete2.png)
 
 
-
+## Floor and Select
 ![Floor](/images/BST.floor.png)
-
 ![Select](/images/BST.select.png)
