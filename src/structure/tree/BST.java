@@ -4,14 +4,14 @@ import java.util.*;
 
 public class BST<K extends Comparable<K>, V> {
 
-    private Node root;
+    protected Node root;
 
-    private class Node {
-        private K key;
-        private V value;
-        private Node left;
-        private Node right;
-        private int numOfChildren; // numOfChildren including its own
+    protected class Node {
+        protected K key;
+        protected V value;
+        protected Node left;
+        protected Node right;
+        protected int numOfChildren; // numOfChildren including its own
 
         public Node(K key, V value, int numOfChildren) {
             this.key = key;
@@ -24,7 +24,7 @@ public class BST<K extends Comparable<K>, V> {
         return size(root);
     }
 
-    private int size(Node node) {
+    protected int size(Node node) {
         if (node == null)
             return 0;
         else return node.numOfChildren;
@@ -34,7 +34,7 @@ public class BST<K extends Comparable<K>, V> {
         return get(root, key);
     }
 
-    private V get(Node node, K key) {
+    protected V get(Node node, K key) {
 
         if (node == null) // key doesn't exist in BST
             return null;
@@ -54,7 +54,7 @@ public class BST<K extends Comparable<K>, V> {
         root = put(root, key, value);
     }
 
-    private Node put(Node node, K key, V value) {
+    protected Node put(Node node, K key, V value) {
         // Change key's value if key in subtree.
         // Otherwise, add new node to subtree associating key with value
 
@@ -80,7 +80,7 @@ public class BST<K extends Comparable<K>, V> {
         return min(root).key;
     }
 
-    private Node min(Node node) {
+    protected Node min(Node node) {
 
         // go left down until a node doesn't have a left child
         if (node.left == null)
@@ -93,7 +93,7 @@ public class BST<K extends Comparable<K>, V> {
         return max(root).key;
     }
 
-    private Node max(Node node) {
+    protected Node max(Node node) {
         // go right down until a node doesn't have a right child
         if (node.right == null)
             return node;
@@ -106,7 +106,7 @@ public class BST<K extends Comparable<K>, V> {
         return node == null ? null : node.key;
     }
 
-    private Node floor(Node node, K key) {
+    protected Node floor(Node node, K key) {
         if (node == null)
             return null;
 
@@ -134,7 +134,7 @@ public class BST<K extends Comparable<K>, V> {
         return node == null ? null : node.key;
     }
 
-    private Node ceil(Node node, K key) {
+    protected Node ceil(Node node, K key) {
         if (node == null)
             return null;
 
@@ -160,7 +160,7 @@ public class BST<K extends Comparable<K>, V> {
     }
 
     // node index : size - rightSize - 1
-    private Node select(Node node, int index) {
+    protected Node select(Node node, int index) {
         // Return Node containing key of index
         if (node == null)
             return null;
@@ -186,7 +186,7 @@ public class BST<K extends Comparable<K>, V> {
         /   /
        A   M   <- rank(node.left, key) returns 0
      */
-    private int rank(Node node, K key) {
+    protected int rank(Node node, K key) {
         // Return size less than node.key in the subtree rooted at node
         if (node == null)
             return 0;
@@ -206,7 +206,7 @@ public class BST<K extends Comparable<K>, V> {
     }
 
     // remove leftmost node and shift up nodes until root
-    private Node deleteMin(Node node) {
+    protected Node deleteMin(Node node) {
         if (node.left == null)
             return node.right; // right child exists or can be null
 
@@ -219,7 +219,7 @@ public class BST<K extends Comparable<K>, V> {
         root = delete(root, key);
     }
 
-    private Node delete(Node node, K key) {
+    protected Node delete(Node node, K key) {
         if (node == null)
             return null;
 
@@ -255,30 +255,34 @@ public class BST<K extends Comparable<K>, V> {
 
     public Iterable<K> keys(K low, K high) {
         Stack<Node> stack = new Stack<>();
-        Queue<K> queue = new LinkedList<>();
+        List<K> list = new ArrayList<>();
 
         Node node = root;
 
-        while (node != null) {
-            int cmpLow = low.compareTo(node.key);
-            int cmpHigh = high.compareTo(node.key);
+        while (!stack.isEmpty() || node != null) {
 
-            // low <= key <= high
-            if (cmpLow <= 0 && 0 <= cmpHigh)
-                queue.add(node.key);
+            if (node != null) {
+                stack.push(node);
 
-            // low < node.key < high
-            //        /    \
-            //     left   right
-            if (cmpLow < 0) // low < key -> search left
-                stack.push(node.left);
-            if (cmpHigh > 0) // key < high -> search right
-                stack.push(node.right);
+                if (node.key.compareTo(low) > 0) // key > low -> search left more
+                    node = node.left;
+                else
+                    node = null;
 
-            node = stack.pop();
+            } else {
+                node = stack.pop();
+
+                // low <= key <= high
+                if (low.compareTo(node.key) <= 0 && high.compareTo(node.key) >= 0)
+                    list.add(node.key);
+
+                if (node.key.compareTo(high) < 0) // key < high -> search right more
+                    node = node.right;
+                else
+                    node = null;
+            }
         }
-
-        return queue;
+        return list;
     }
 
     public Iterable<K> preOrder() {

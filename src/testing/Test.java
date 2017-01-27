@@ -37,18 +37,19 @@ public class Test {
 
     public static void testBST() {
         BST<String, String> bst = new BST<>();
-        bst.put("F", "F");
-        bst.put("B", "B");
-        bst.put("G", "G");
-        bst.put("A", "A");
-        bst.put("D", "D");
-        bst.put("C", "C");
+        bst.put("S", "S");
         bst.put("E", "E");
-        bst.put("I", "I");
+        bst.put("X", "X");
+        bst.put("A", "A");
+        bst.put("R", "R");
+        bst.put("C", "C");
         bst.put("H", "H");
+        bst.put("M", "M");
+        bst.put("L", "L");
+        bst.put("P", "P");
 
 
-        for (String k : bst.keys("B", "E"))
+        for (String k : bst.keys("F", "T"))
             System.out.println(k);
     }
     public static void quickSort(int[] arr, int left, int right) {
