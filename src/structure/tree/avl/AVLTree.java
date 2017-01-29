@@ -1,10 +1,9 @@
-package structure.tree;
+package structure.tree.avl;
 
-import designpattern.structural.composite.Part;
+import structure.tree.bst.BST;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeMap;
 
 public class AVLTree<K extends Comparable<K>, V> extends BST<K, V> {
 
