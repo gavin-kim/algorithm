@@ -3,7 +3,9 @@ package testing;
 import com.sun.javaws.util.JavawsConsoleController;
 import graph.GST;
 import graph.UndirectedGraph;
+import quiz.ArrayInterSection;
 import sorting.quick.QuickSort;
+import structure.tree.AVLTree;
 import structure.tree.BST;
 
 import java.io.File;
@@ -11,6 +13,7 @@ import java.io.InputStream;
 import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryMXBean;
 import java.lang.management.MemoryUsage;
+import java.lang.reflect.Array;
 import java.time.LocalTime;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -29,10 +32,44 @@ public class Test {
     private static MemoryMXBean memoryMXBean = ManagementFactory.getMemoryMXBean();
 
     public static void main(String[] args) {
+        //testBST();
+        System.out.println("---");
+        testAVL();
 
-        File file = new File("resources/data/10000EWD.txt");
+    }
 
-        testBST();
+    public static void testAVL() {
+        AVLTree<String, String> avlTree = new AVLTree<>();
+        avlTree.put("S", "S");
+        avlTree.put("E", "E");
+        avlTree.put("X", "X");
+        avlTree.put("A", "A");
+        avlTree.put("R", "R");
+        avlTree.put("C", "C");
+        avlTree.put("H", "H");
+        avlTree.put("M", "M");
+        avlTree.put("L", "L");
+        avlTree.put("P", "P");
+
+        System.out.println(avlTree.delete("C"));
+        System.out.println(avlTree.delete("H"));
+        System.out.println(avlTree.delete("P"));
+        System.out.println(avlTree.delete("S"));
+        System.out.println(avlTree.delete("E"));
+        System.out.println(avlTree.delete("A"));
+        System.out.println(avlTree.delete("X"));
+        System.out.println(avlTree.delete("M"));
+        System.out.println(avlTree.delete("L"));
+        System.out.println(avlTree.delete("P"));
+        System.out.println(avlTree.delete("M"));
+        avlTree.put("sdf", "sdf");
+        System.out.println(avlTree.min());
+        System.out.println(avlTree.max());
+        System.out.println(avlTree.size());
+        System.out.println(avlTree.getHeight());
+
+        for (String k : avlTree.keys())
+            System.out.println(k);
     }
 
     public static void testBST() {

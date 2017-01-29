@@ -5,75 +5,77 @@ import java.util.*;
 public class BST<K extends Comparable<K>, V> {
 
     protected Node root;
+    protected int size;
 
     protected class Node {
         protected K key;
         protected V value;
         protected Node left;
         protected Node right;
-        protected int numOfChildren; // numOfChildren including its own
 
-        public Node(K key, V value, int numOfChildren) {
+        public Node(K key, V value) {
             this.key = key;
             this.value = value;
-            this.numOfChildren = numOfChildren;
+        }
+
+        @Override
+        public String toString() {
+            return String.format("Key: %s, Value: %s", key, value);
         }
     }
 
     public int size() {
-        return size(root);
-    }
-
-    protected int size(Node node) {
-        if (node == null)
-            return 0;
-        else return node.numOfChildren;
+        return size;
     }
 
     public V get(K key) {
-        return get(root, key);
+
+        Node node = root;
+
+        while (node != null) {
+            int cmp = key.compareTo(node.key);
+
+            if (cmp < 0) node = node.left;   // go left: key is less
+            else if (cmp > 0) node = node.right;  // go right: key is greater
+            else return node.value;  // find a key
+        }
+        return null;
     }
 
-    protected V get(Node node, K key) {
-
-        if (node == null) // key doesn't exist in BST
-            return null;
-
-        int cmp = key.compareTo(node.key);
-
-        if (cmp < 0)
-            return get(node.left, key);   // go left: key is less
-        else if (cmp > 0)
-            return get(node.right, key);  // go right: key is greater
-        else
-            return node.value;            // find a key
-    }
-
-    public void put(K key, V value) {
+    public V put(K key, V value) {
         // Search for key. Update value if found; grow table if new.
-        root = put(root, key, value);
-    }
-
-    protected Node put(Node node, K key, V value) {
         // Change key's value if key in subtree.
         // Otherwise, add new node to subtree associating key with value
 
-        // Not found, create a new node and return
-        if (node == null)
-            return new Node(key, value, 1);
+        if (root == null) {
+            root = new Node(key, value);
+            return null;
+        }
 
-        int cmp = key.compareTo(node.key);
+        Node parent = null;
+        Node node = root;
 
-        if (cmp < 0) // go left
-            node.left = put(node.left, key, value);
-        else if (cmp > 0) // go right
-            node.right = put(node.right, key, value);
-        else // find the key and change value
-            node.value = value;
+        while (node != null) {
+            parent = node;
+            int cmp = key.compareTo(node.key);
 
-        // count children in case a new node is added (size(null) returns 0)
-        node.numOfChildren = size(node.left) + size(node.right) + 1;
-        return node;
+            if (cmp < 0) // go left
+                node = node.left;
+            else if (cmp > 0) // go right
+                node = node.right;
+            else { // find the key and change value
+                V previous = node.value;
+                node.value = value;
+                return previous;
+            }
+        }
+
+        if (key.compareTo(parent.key) < 0)
+            parent.left = new Node(key, value);
+        else
+            parent.right = new Node(key, value);
+        size++;
+        return null;
     }
 
     public K min() {
@@ -154,106 +156,102 @@ public class BST<K extends Comparable<K>, V> {
         }
     }
 
-    // find a key associated with the index (index starts from 0)
-    public K select(int index) {
-        return select(root, index).key;
-    }
 
-    // node index : size - rightSize - 1
-    protected Node select(Node node, int index) {
-        // Return Node containing key of index
-        if (node == null)
-            return null;
+    // delete a item that has the same key, return a value if it's found or null
+    public V delete(K key) {
+        Node parent = null;
+        Node node = root;
 
-        int leftSize = size(node.left); // index of current node is left size
+        while (node != null) {
 
-        if (index < leftSize)       // index is less
-            return select(node.left, index);
-        else if (index > leftSize)  // index is greater (index - leftSize - 1(current))
-            return select(node.right, index - leftSize - 1); // subtract size of (left + current)
-        else
-            return node; // find a node
-    }
+            int cmp = key.compareTo(node.key);
 
-    // rank starts from 1
-    public int rank(K key) {
-        return rank(root, key);
-    }
-    /*  when key = L
-           J   <- rank(node.right, key) + 1 = 3
-          / \
-         B   N
-        /   /
-       A   M   <- rank(node.left, key) returns 0
-     */
-    protected int rank(Node node, K key) {
-        // Return size less than node.key in the subtree rooted at node
-        if (node == null)
-            return 0;
-
-        int cmp = key.compareTo(node.key);
-
-        if (cmp < 0)      // key is smaller
-            return rank(node.left, key);
-        else if (cmp > 0) // key is bigger (stack a size of left subtree + 1)
-            return size(node.left) + 1 + rank(node.right, key);
-        else
-            return size(node.left); // key is the same
-    }
-
-    public void deleteMin() {
-        root = deleteMin(root);
-    }
-
-    // remove leftmost node and shift up nodes until root
-    protected Node deleteMin(Node node) {
-        if (node.left == null)
-            return node.right; // right child exists or can be null
-
-        node.left = deleteMin(node.left); // shift up nodes from leftmost node
-        node.numOfChildren = size(node.left) + size(node.right) + 1; // update size
-        return node;
-    }
-
-    public void delete(K key) {
-        root = delete(root, key);
-    }
-
-    protected Node delete(Node node, K key) {
-        if (node == null)
-            return null;
-
-        int cmp = key.compareTo(node.key);
-
-        if (cmp < 0)
-            node.left = delete(node.left, key);
-        else if (cmp > 0)
-            node.right = delete(node.right, key);
-        // find a key
-        else {
-            // Case 1: 0 or 1 child
-            if (node.right == null)
-                return node.left;
-            else if (node.left == null)
-                return node.right;
-
-            // Case 2: 2 children
-            Node removedNode = node;
-            node = min(node.right); // find minimum key in the right subtree
-            node.right = deleteMin(removedNode.right); // delete a node
-            node.left = removedNode.left;
+            if (cmp < 0) {
+                parent = node;
+                node = node.left;
+            }
+            else if (cmp > 0) {
+                parent = node;
+                node = node.right;
+            }
+            else break; // find the key
         }
 
-        node.numOfChildren = size(node.left) + size(node.right) + 1;
+        Node found = node;
+
+        if (found == null) // not found
+            return null;
+
+        // has 0 or 1 child
+        if (node.right == null) node = node.left;
+        else if (node.left == null) node = node.right;
+        else { // has 2 children
+
+            /*
+                         found              leftmost
+                         /   \               /    \
+                        A     B             A      B
+                             /             / \    / \
+                         leftmost                C
+                              \
+                               C
+            */
+            Node parentOfLeftmost = node;
+            Node leftmost = parentOfLeftmost.right;
+
+            // find leftmost and its parent from found.right
+            while (leftmost.left != null) {
+                parentOfLeftmost = leftmost;
+                leftmost = leftmost.left;
+            }
+
+            // eliminate leftmost
+            if (parentOfLeftmost.right == leftmost)
+                parentOfLeftmost.right = leftmost.right;
+            else
+                parentOfLeftmost.left = leftmost.right;
+
+            node = leftmost;          // replace the node with leftmost
+            node.left = found.left;   // copy children nodes
+            node.right = found.right;
+        }
+
+        // connect the node with its parent
+        if (parent == null) root = node; // current node is a root:
+        else if (parent.left == found) parent.left = node;
+        else parent.right = node;
+
+        size--;
+        return found.value; // found
+    }
+
+    /*
+             target             target
+                 \                 \
+             target.right       target.right
+                /  \              /  \
+             node   ?            A    ?
+             /  \               / \
+           null  A
+
+    remove leftmost node from the node
+     */
+    private Node deleteMin(Node node) {
+
+        // remove leftmost and replace it to leftmost's right child
+        if (node.left == null)
+            return node.right;
+
+        node.left = deleteMin(node.left);         // go left
         return node;
     }
 
     // inorder
-    public Iterable<K> keys() {
+    public List<K> keys() {
         return keys(min(), max());
     }
 
-    public Iterable<K> keys(K low, K high) {
+    public List<K> keys(K low, K high) {
         Stack<Node> stack = new Stack<>();
         List<K> list = new ArrayList<>();
 
@@ -264,10 +262,8 @@ public class BST<K extends Comparable<K>, V> {
             if (node != null) {
                 stack.push(node);
 
-                if (node.key.compareTo(low) > 0) // key > low -> search left more
-                    node = node.left;
-                else
-                    node = null;
+                // low < key -> search left more
+                node = low.compareTo(node.key) < 0 ? node.left : null;
 
             } else {
                 node = stack.pop();
@@ -276,16 +272,14 @@ public class BST<K extends Comparable<K>, V> {
                 if (low.compareTo(node.key) <= 0 && high.compareTo(node.key) >= 0)
                     list.add(node.key);
 
-                if (node.key.compareTo(high) < 0) // key < high -> search right more
-                    node = node.right;
-                else
-                    node = null;
+                // key < high -> search right more
+                node = node.key.compareTo(high) < 0 ? node.right : null;
             }
         }
         return list;
     }
 
-    public Iterable<K> preOrder() {
+    public List<K> preOrder() {
         Stack<Node> stack = new Stack<>();
         List<K> list = new ArrayList<>();
 
@@ -304,7 +298,7 @@ public class BST<K extends Comparable<K>, V> {
         return list;
     }
 
-    public Iterable<K> inOrder() {
+    public List<K> inOrder() {
         Stack<Node> stack = new Stack<>();
         List<K> list = new ArrayList<>();
 
@@ -324,7 +318,7 @@ public class BST<K extends Comparable<K>, V> {
         return list;
     }
 
-    public Iterable<K> postOrder() {
+    public List<K> postOrder() {
         Stack<Node> stack = new Stack<>();
         List<K> list = new ArrayList<>();
 
