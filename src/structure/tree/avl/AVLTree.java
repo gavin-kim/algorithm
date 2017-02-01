@@ -8,7 +8,7 @@ import java.util.List;
 public class AVLTree<K extends Comparable<K>, V> extends BST<K, V> {
 
     protected class AVLNode extends Node {
-        protected int height; // in order to balance the tree
+        public int height; // in order to balance the tree
 
         public AVLNode(K key, V value) {
             super(key, value);

@@ -8,10 +8,10 @@ public class BST<K extends Comparable<K>, V> {
     protected int size;
 
     protected class Node {
-        protected K key;
-        protected V value;
-        protected Node left;
-        protected Node right;
+        public K key;
+        public V value;
+        public Node left;
+        public Node right;
 
         public Node(K key, V value) {
             this.key = key;
