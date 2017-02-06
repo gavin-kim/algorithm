@@ -1,7 +1,6 @@
-package graph;
+package structure.graph;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.*;
 
 public class UndirectedGraph<V> implements Graph<V> {

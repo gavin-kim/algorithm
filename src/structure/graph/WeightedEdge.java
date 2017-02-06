@@ -1,4 +1,4 @@
-package graph;
+package structure.graph;
 
 public class WeightedEdge extends Edge implements Comparable<WeightedEdge> {
 

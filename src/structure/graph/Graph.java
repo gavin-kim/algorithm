@@ -1,4 +1,4 @@
-package graph;
+package structure.graph;
 
 
 public interface Graph<V> {
