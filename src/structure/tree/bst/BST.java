@@ -192,9 +192,9 @@ public class BST<K extends Comparable<K>, V> {
                          /   \               /    \
                         A     B             A      B
                              /             / \    / \
-                         leftmost                C
+                         leftmost                ?
                               \
-                               C
+                               ?
             */
             Node parentOfLeftmost = node;
             Node leftmost = parentOfLeftmost.right;

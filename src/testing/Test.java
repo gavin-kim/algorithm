@@ -3,8 +3,11 @@ package testing;
 import structure.tree.avl.AVLTree;
 import structure.tree.bst.BST;
 
+import java.io.File;
 import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryMXBean;
+import java.sql.*;
+import java.util.*;
 
 import static sorting.heap.HeapSort.swap;
 
@@ -17,11 +20,131 @@ public class Test {
     private static final int RADIX_SIZE = 10;
     private static MemoryMXBean memoryMXBean = ManagementFactory.getMemoryMXBean();
 
-    public static void main(String[] args) {
-        //testBST();
-        System.out.println("---");
-        testAVL();
+    public static void main(String[] args) throws Exception {
+        Node tree1 = new Node("1");
+        tree1.leftChild = new Node("2");
+        tree1.rightChild = new Node("3");
+        tree1.leftChild.leftChild = new Node("4");
+        tree1.rightChild.leftChild = new Node("5");
+        tree1.rightChild.rightChild = new Node("6");
+        tree1.rightChild.rightChild.rightChild = new Node("10");
 
+        Node tree2 = new Node("1");
+        tree2.leftChild = new Node("3");
+        tree2.rightChild = new Node("2");
+        tree2.leftChild.leftChild = new Node("6");
+        tree2.leftChild.leftChild.leftChild = new Node("10");
+        tree2.leftChild.rightChild = new Node("5");
+        tree2.rightChild.rightChild = new Node("4");
+
+
+        System.out.println(areReflected(tree1, tree2));
+
+    }
+
+    static class Node {
+        Node leftChild;
+        Node rightChild;
+        String value;
+
+        public Node(String value) {
+            this.value = value;
+        }
+
+    }
+
+    static boolean areReflected(Node tree1, Node tree2) {
+        Queue<Node> q1 = new LinkedList<>();
+        Queue<Node> q2 = new LinkedList<>();
+        q1.add(tree1);
+        q2.add(tree2);
+
+        while (!q1.isEmpty() && !q2.isEmpty()) {
+
+            tree1 = q1.poll();
+            tree2 = q2.poll();
+
+            if (tree1 == null && tree2 == null)
+                continue;
+
+            if (tree1 != null && tree2 != null && tree1.value.equals(tree2.value)) {
+
+                q1.add(tree1.leftChild);
+                q2.add(tree2.rightChild);
+
+                q1.add(tree1.rightChild);
+                q2.add(tree2.leftChild);
+
+
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static void hackerrankQ() throws Exception {
+        Scanner input = new Scanner(new File("resources/data/input04.txt"));
+
+        int lengthA = input.nextInt();
+        Map<Integer, Integer> A = new HashMap<>();
+        Map<Integer, Integer> B = new HashMap<>();
+
+        Set<Integer> missingNumbers = new TreeSet<>();
+
+        for (int i = 0; i < lengthA; i++) {
+            int num = input.nextInt();
+
+            if (A.containsKey(num))
+                A.put(num, A.get(num) + 1);
+            else
+                A.put(num, 1);
+        }
+
+        int lengthB = input.nextInt();
+
+        for (int i = 0; i < lengthB; i++) {
+            int num = input.nextInt();
+
+            if (B.containsKey(num))
+                B.put(num, B.get(num) + 1);
+            else
+                B.put(num, 1);
+        }
+
+        for (int key : B.keySet())
+            if (!B.get(key).equals(A.get(key)))
+                missingNumbers.add(key);
+
+        for (int v : missingNumbers)
+            System.out.print(v + " ");
+    }
+
+    public static int test2(Connection c, String city) throws SQLException {
+
+        int numActive;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            ps = c.prepareStatement(
+                "SELECT COUNT(*)" +
+                    "FROM EMPLOYEE" +
+                    "INNER JOIN CITY ON EMPLOYEE.CITY_ID = CITY.CITY_ID" +
+                    "WHERE EMPLOYEE.EMP_ACTIVE = 'Y' AND CITY.CITY_NAME = ?");
+
+            ps.setString(1, city);
+            rs = ps.executeQuery();
+            numActive = rs.getInt(1);
+
+        } finally {
+            if (rs != null)
+                rs.close();
+            if (ps != null)
+                ps.close();
+        }
+
+        return numActive;
     }
 
     public static void testAVL() {
@@ -103,6 +226,8 @@ public class Test {
         }
         return left;
     }
+
+
 }
 
 
