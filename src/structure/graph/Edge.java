@@ -1,4 +1,4 @@
-package graph;
+package structure.graph;
 
 public class Edge {
     private int u;
