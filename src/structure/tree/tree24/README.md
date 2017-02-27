@@ -4,12 +4,12 @@
 
 ![2-3-4TreeNodes](/images/2-3-4TreeNodes.png)
 
-      Insert
+      * Insert
       
       1. Is overflow(4+ elements)? -Y-> Pick up the 3rd element in the node and put it in its parent.
                                    -N-> Just insert it.
 
-      Delete
+      * Delete
 
       1. Is a leaf node? 
       (Y) Delete and Go to the next
@@ -31,13 +31,13 @@
       (Y) No.3 with the parent
       (N) Done.
                                             
-* Transfer
+      * Transfer
 
            (C F)          (C F)          (- F)         (B F)              
           /  |  \        /  |  \        /  | \        /  |  \
         (A B) D   G    (A B) -   G    (A B) C  G    (A -) C   G 
             
-* Fusion
+      * Fusion
 
          (B D F)        (B D F)           (D F)
          / | | \        / | | \          /  |  \
