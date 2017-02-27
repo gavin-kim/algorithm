@@ -10,7 +10,7 @@
       (Y) Pick up the 3rd element in the node and put it in its parent.
       (N) Just insert it.
 
-      * Delete
+### Delete
 
       1. Is a leaf node? 
       (Y) Delete and Go to the next
@@ -32,13 +32,13 @@
       (Y) No.3 with the parent
       (N) Done.
                                             
-      * Transfer
+ ### Transfer
 
            (C F)          (C F)          (- F)         (B F)              
           /  |  \        /  |  \        /  | \        /  |  \
         (A B) D   G    (A B) -   G    (A B) C  G    (A -) C   G 
             
-      * Fusion
+ ### Fusion
 
          (B D F)        (B D F)           (D F)
          / | | \        / | | \          /  |  \
