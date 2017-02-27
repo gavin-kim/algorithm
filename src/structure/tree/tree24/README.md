@@ -4,13 +4,13 @@
 
 ![2-3-4TreeNodes](/images/2-3-4TreeNodes.png)
 
-* Insert
+### Insert
       
       1. Is overflow (4+ elements)? 
       (Y) Pick up the 3rd element in the node and put it in its parent.
       (N) Just insert it.
 
-* Delete
+      * Delete
 
       1. Is a leaf node? 
       (Y) Delete and Go to the next
