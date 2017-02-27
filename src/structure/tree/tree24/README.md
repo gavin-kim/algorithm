@@ -12,13 +12,15 @@
 * Delete
 
       1. Is a leaf node? 
-            (Y) Delete and Go to the next  
+            (Y) Delete and Go to the next
+            
             (N) Swap the node with rightmost and remove it. 
             (All leaf node is always on the same level in 2-3-4 Tree: rightmost is a leaf node) 
       
       [leaf node]
       2. Is underflow? 
-            (Y) Go to the next 
+            (Y) Go to the next
+            
             (N) Done.
      
       [leaf node && underflow]
