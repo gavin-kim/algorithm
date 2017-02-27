@@ -31,13 +31,11 @@
       4. A parent of the node is underflow? 
       (Y) No.3 with the parent
       (N) Done.
-      
  ### Transfer
 
          (C F)          (C F)          (- F)         (B F)              
         /  |  \        /  |  \        /  | \        /  |  \
       (A B) D   G    (A B) -   G    (A B) C  G    (A -) C   G 
-        
  ### Fusion
 
        (B D F)        (B D F)           (D F)
