@@ -31,12 +31,12 @@
 
            (C F)          (C F)          (- F)         (B F)              
           /  |  \        /  |  \        /  | \        /  |  \
-       (A B) D   G    (A B) -   G    (A B) C  G    (A -) C   G 
+        (A B) D   G    (A B) -   G    (A B) C  G    (A -) C   G 
             
 * Fusion
 
-        (B D F)        (B D F)           (D F)
-        / | | \        / | | \          /  |  \
-       A  C E  G      A  - E  G      (A B) E   G
+         (B D F)        (B D F)           (D F)
+         / | | \        / | | \          /  |  \
+        A  C E  G      A  - E  G      (A B) E   G
       
       
