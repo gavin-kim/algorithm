@@ -1,6 +1,6 @@
 # 2-3-4 Tree (Completely balanced search tree)
 
-* NOTE: All leaf nodes appearing on the same level
+### 2-3-4 Nodes (NOTE: All leaf nodes appearing on the same level)
 
 ![2-3-4TreeNodes](/images/2-3-4TreeNodes.png)
 
@@ -31,13 +31,14 @@
       4. A parent of the node is underflow? 
       (Y) No.3 with the parent
       (N) Done.
+      
  ### Transfer
-
+      .
          (C F)          (C F)          (- F)         (B F)              
         /  |  \        /  |  \        /  | \        /  |  \
       (A B) D   G    (A B) -   G    (A B) C  G    (A -) C   G 
  ### Fusion
-
+      .
        (B D F)        (B D F)           (D F)
        / | | \        / | | \          /  |  \
       A  C E  G      A  - E  G      (A B) E   G
