@@ -11,6 +11,7 @@
       (N) Just insert it.
 
 ### Delete
+![24TreeDeleteFlowchart](/images/24TreeDeleteFlowchart.png)
 
       1. Is a leaf node? 
       (Y) Delete and Go to the next
