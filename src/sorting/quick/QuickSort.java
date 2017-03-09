@@ -27,7 +27,8 @@ public class QuickSort {
         int pivot = arr[right]; // pivot
         int p = right--;        // right is pivot (right starts from right - 1)
 
-        while (true) {
+        while (left <= right) {
+
             // find greater than or equals to pivot
             while (left <= right && arr[left] < pivot)
                 left++;
@@ -36,14 +37,12 @@ public class QuickSort {
             while (left <= right && arr[right] > pivot)
                 right--;
 
-            // scan complete
-            if (left > right)
-                break;
-
-            // switch when left and right are equal to pivot always switch
-            swap(arr, left, right);
-            left++;
-            right--; // it's necessary in case values equal to pivot
+            if (left <= right) {
+                // switch when left and right are equal to pivot always switch
+                swap(arr, left, right);
+                left++;
+                right--; // it's necessary in case values equal to pivot
+            }
         }
 
         // swap pivot with left

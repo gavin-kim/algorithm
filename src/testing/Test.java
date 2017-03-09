@@ -2,12 +2,16 @@ package testing;
 
 import structure.tree.avl.AVLTree;
 import structure.tree.bst.BST;
+import structure.tree.tree24.Tree24;
 
 import java.io.File;
 import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryMXBean;
+import java.math.BigInteger;
 import java.sql.*;
 import java.util.*;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 import static sorting.heap.HeapSort.swap;
 
@@ -20,165 +24,107 @@ public class Test {
     private static final int RADIX_SIZE = 10;
     private static MemoryMXBean memoryMXBean = ManagementFactory.getMemoryMXBean();
 
-    public static void main(String[] args) throws Exception {
-        Node tree1 = new Node("1");
-        tree1.leftChild = new Node("2");
-        tree1.rightChild = new Node("3");
-        tree1.leftChild.leftChild = new Node("4");
-        tree1.rightChild.leftChild = new Node("5");
-        tree1.rightChild.rightChild = new Node("6");
-        tree1.rightChild.rightChild.rightChild = new Node("10");
-
-        Node tree2 = new Node("1");
-        tree2.leftChild = new Node("3");
-        tree2.rightChild = new Node("2");
-        tree2.leftChild.leftChild = new Node("6");
-        tree2.leftChild.leftChild.leftChild = new Node("10");
-        tree2.leftChild.rightChild = new Node("5");
-        tree2.rightChild.rightChild = new Node("4");
-
-
-        System.out.println(areReflected(tree1, tree2));
-
+    public static void main(String[] args) throws Exception{
+        Wrapper<Integer> wrapper = new Wrapper<>(1);
+        new Test().getHello(1, wrapper);
+        System.out.println(wrapper.value);
     }
 
-    static class Node {
-        Node leftChild;
-        Node rightChild;
-        String value;
+    static class Wrapper<V> {
+        V value;
 
-        public Node(String value) {
+        Wrapper (V value) {
             this.value = value;
         }
-
     }
 
-    static boolean areReflected(Node tree1, Node tree2) {
-        Queue<Node> q1 = new LinkedList<>();
-        Queue<Node> q2 = new LinkedList<>();
-        q1.add(tree1);
-        q2.add(tree2);
+    public String outer = "outer";
 
-        while (!q1.isEmpty() && !q2.isEmpty()) {
+    public void getHello(int local, Wrapper<Integer> wrapper) {
 
-            tree1 = q1.poll();
-            tree2 = q2.poll();
+        // Main reason: When run-time, anonymous class is initialized and
+        // local variables are copied to anonymous class with final
 
-            if (tree1 == null && tree2 == null)
-                continue;
+        new Thread() {
 
-            if (tree1 != null && tree2 != null && tree1.value.equals(tree2.value)) {
+            // private final int local = local; --> this happens when runtime
 
-                q1.add(tree1.leftChild);
-                q2.add(tree2.rightChild);
+            public void run() {
+                // do something...
 
-                q1.add(tree1.rightChild);
-                q2.add(tree2.leftChild);
-
-
-            } else {
-                return false;
+                // local = 2 // can not modify a final variable
+                wrapper.value = 2;         // use a wrapper to modify
+                System.out.println(outer); // use outer variables (outer instance exists after getHello is done)
+                outer = "outer2";
             }
-        }
-        return true;
+        }.run();
+
+        // local = 3; // there will be some unexpected data synchronization problems
+        wrapper.value = 3;
+        outer = "outer3";
     }
 
-    public static void hackerrankQ() throws Exception {
-        Scanner input = new Scanner(new File("resources/data/input04.txt"));
+    public static double getMean(int[] arr) {
+        long sum = 0;
+        for (int v : arr)
+            sum += v;
 
-        int lengthA = input.nextInt();
-        Map<Integer, Integer> A = new HashMap<>();
-        Map<Integer, Integer> B = new HashMap<>();
-
-        Set<Integer> missingNumbers = new TreeSet<>();
-
-        for (int i = 0; i < lengthA; i++) {
-            int num = input.nextInt();
-
-            if (A.containsKey(num))
-                A.put(num, A.get(num) + 1);
-            else
-                A.put(num, 1);
-        }
-
-        int lengthB = input.nextInt();
-
-        for (int i = 0; i < lengthB; i++) {
-            int num = input.nextInt();
-
-            if (B.containsKey(num))
-                B.put(num, B.get(num) + 1);
-            else
-                B.put(num, 1);
-        }
-
-        for (int key : B.keySet())
-            if (!B.get(key).equals(A.get(key)))
-                missingNumbers.add(key);
-
-        for (int v : missingNumbers)
-            System.out.print(v + " ");
+        return sum / (double)arr.length;
     }
 
-    public static int test2(Connection c, String city) throws SQLException {
+    public static double getMedian(int[] arr) {
 
-        int numActive;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
+        int mid = arr.length / 2;
 
-        try {
-            ps = c.prepareStatement(
-                "SELECT COUNT(*)" +
-                    "FROM EMPLOYEE" +
-                    "INNER JOIN CITY ON EMPLOYEE.CITY_ID = CITY.CITY_ID" +
-                    "WHERE EMPLOYEE.EMP_ACTIVE = 'Y' AND CITY.CITY_NAME = ?");
+        if ((arr.length & 1) == 1)
+            return arr[mid];
+        else
+            return (arr[mid - 1] + arr[mid]) / (double)2;
+    }
 
-            ps.setString(1, city);
-            rs = ps.executeQuery();
-            numActive = rs.getInt(1);
+    public static int getMode(int[] arr) {
 
-        } finally {
-            if (rs != null)
-                rs.close();
-            if (ps != null)
-                ps.close();
+        int maxCount = 1;
+        int mode = arr[0];
+
+        int count = 1;
+        int previous = -1;
+
+        for (int i = 0; i < arr.length; i++) {
+            if (previous == arr[i])
+                count++;
+            else {
+                if (count > maxCount) {
+                    maxCount = count;
+                    mode = previous;
+                }
+
+                count = 1;
+            }
+
+            previous = arr[i];
         }
 
-        return numActive;
+        return mode;
     }
+
 
     public static void testAVL() {
-        AVLTree<String, String> avlTree = new AVLTree<>();
-        avlTree.put("S", "S");
-        avlTree.put("E", "E");
-        avlTree.put("X", "X");
-        avlTree.put("A", "A");
-        avlTree.put("R", "R");
-        avlTree.put("C", "C");
-        avlTree.put("H", "H");
-        avlTree.put("M", "M");
-        avlTree.put("L", "L");
-        avlTree.put("P", "P");
+        Tree24<String, String> tree24 = new Tree24<>();
+        tree24.put("S", "S");
+        tree24.put("E", "E");
+        tree24.put("X", "X");
+        tree24.put("A", "A");
+        tree24.put("R", "R");
+        tree24.put("C", "C");
+        tree24.put("H", "H");
+        tree24.put("M", "M");
+        tree24.put("L", "L");
+        tree24.put("P", "P");
+        tree24.put("R", "sdf");
+        System.out.println(tree24.size());
+        System.out.println(tree24.get("C"));
 
-        System.out.println(avlTree.delete("C"));
-        System.out.println(avlTree.delete("H"));
-        System.out.println(avlTree.delete("P"));
-        System.out.println(avlTree.delete("S"));
-        System.out.println(avlTree.delete("E"));
-        System.out.println(avlTree.delete("A"));
-        System.out.println(avlTree.delete("X"));
-        System.out.println(avlTree.delete("M"));
-        System.out.println(avlTree.delete("L"));
-        System.out.println(avlTree.delete("P"));
-        System.out.println(avlTree.delete("M"));
-        avlTree.put("sdf", "sdf");
-        System.out.println(avlTree.min());
-        System.out.println(avlTree.max());
-        System.out.println(avlTree.size());
-        System.out.println(avlTree.getHeight());
-
-        for (String k : avlTree.keys())
-            System.out.println(k);
     }
 
     public static void testBST() {
@@ -197,34 +143,6 @@ public class Test {
 
         for (String k : bst.keys("F", "T"))
             System.out.println(k);
-    }
-    public static void quickSort(int[] arr, int left, int right) {
-        int index = partition(arr, left, right);
-        if (left< index - 1) { // Sort left half
-            quickSort(arr, left, index - 1);
-        }
-        if (index< right) { // Sort right half
-            quickSort(arr, index, right);
-        }
-    }
-
-    public static int partition(int[] arr, int left, int right) {
-        int pivot = arr[(left + right) / 2]; // Pick pivot point
-
-        while (left<= right) {
-            //Find element on left that should be on right
-            while (arr[left] < pivot) left++;
-
-            //Find element on right that should be on left
-            while (arr[right] > pivot) right--;
-
-            if (left<= right) {
-                swap(arr, left, right); // swaps elements
-                left++;
-                right--;
-            }
-        }
-        return left;
     }
 
 

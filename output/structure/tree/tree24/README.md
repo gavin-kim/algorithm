@@ -36,12 +36,12 @@
  
          (C F)          (C F)          (- F)         (B F)              
         /  |  \        /  |  \        /  | \        /  |  \
-      (A B) D   G    (A B) -   G    (A B) C  G    (A -) C   G   <--- always leaf nodes
+      (A B) D   G    (A B) -   G    (A B) C  G    (A -) C   G
       
 ### Fusion
 
        (B D F)        (B D F)           (D F)
        / | | \        / | | \          /  |  \
-      A  C E  G      A  - E  G      (A B) E   G  
+      A  C E  G      A  - E  G      (A B) E   G
       
       
