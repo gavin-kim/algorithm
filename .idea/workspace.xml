@@ -2,30 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="45351076-95b2-42e5-b58c-dc8be30c0baa" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/BigOCheatsheet.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/big_o.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/data/10000EWD.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/data/1000EWD.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/data/input04.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/data/mediumEWD.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/data/test.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/data/tinyEWD.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/sorting/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/sorting/basicsorts/readme.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/sorting/distribution/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/sorting/distribution/bucket/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/sorting/distribution/counting/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/sorting/distribution/radix/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/sorting/heap/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/sorting/merge/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/sorting/quick/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/structure/graph/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/structure/tree/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/structure/tree/avl/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/structure/tree/bst/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/output/structure/tree/tree24/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/output/" />
@@ -46,7 +22,7 @@
         <entry file="file://$PROJECT_DIR$/src/structure/tree/tree24/Tree24.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="385">
-              <caret line="286" column="52" lean-forward="true" selection-start-line="286" selection-start-column="52" selection-end-line="286" selection-end-column="52" />
+              <caret line="286" column="52" lean-forward="false" selection-start-line="286" selection-start-column="52" selection-end-line="286" selection-end-column="52" />
               <folding />
             </state>
           </provider>
@@ -92,7 +68,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="19">
@@ -138,7 +114,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Test.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Test.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/testing/Test.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="912">
@@ -241,6 +217,56 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Algorithm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Algorithm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Algorithm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="testing" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Algorithm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Algorithm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="structure" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Algorithm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Algorithm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -710,16 +736,16 @@
       <workItem from="1488859228421" duration="5217000" />
       <workItem from="1488885209915" duration="7022000" />
       <workItem from="1489030751230" duration="558000" />
-      <workItem from="1489031352639" duration="1624000" />
+      <workItem from="1489031352639" duration="1865000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="58164000" />
+    <option name="totallyTimeSpent" value="58405000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -733,7 +759,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3188889" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3188889" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19711539" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" x="919" y="191" width="324" height="613" />
@@ -801,7 +827,7 @@
         <state relative-caret-position="1957">
           <caret line="103" column="41" lean-forward="false" selection-start-line="103" selection-start-column="41" selection-end-line="103" selection-end-column="41" />
           <folding>
-            <marker date="1489032639947" expanded="true" signature="65900:65915" ph="..." />
+            <marker date="1489033176400" expanded="true" signature="65054:65069" ph="..." />
           </folding>
         </state>
       </provider>
@@ -851,7 +877,7 @@
         <state relative-caret-position="1995">
           <caret line="105" column="41" lean-forward="false" selection-start-line="105" selection-start-column="41" selection-end-line="105" selection-end-column="41" />
           <folding>
-            <marker date="1489032639947" expanded="true" signature="65900:65915" ph="..." />
+            <marker date="1489033176400" expanded="true" signature="65054:65069" ph="..." />
           </folding>
         </state>
       </provider>
@@ -901,7 +927,7 @@
         <state relative-caret-position="1919">
           <caret line="101" column="41" lean-forward="false" selection-start-line="101" selection-start-column="41" selection-end-line="101" selection-end-column="41" />
           <folding>
-            <marker date="1489032639947" expanded="true" signature="65900:65915" ph="..." />
+            <marker date="1489033176400" expanded="true" signature="65054:65069" ph="..." />
           </folding>
         </state>
       </provider>
@@ -951,7 +977,7 @@
         <state relative-caret-position="1919">
           <caret line="101" column="41" lean-forward="false" selection-start-line="101" selection-start-column="41" selection-end-line="101" selection-end-column="41" />
           <folding>
-            <marker date="1489032639947" expanded="true" signature="65900:65915" ph="..." />
+            <marker date="1489033176400" expanded="true" signature="65054:65069" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1001,7 +1027,7 @@
         <state relative-caret-position="1938">
           <caret line="102" column="41" lean-forward="false" selection-start-line="102" selection-start-column="41" selection-end-line="102" selection-end-column="41" />
           <folding>
-            <marker date="1489032639947" expanded="true" signature="65900:65915" ph="..." />
+            <marker date="1489033176400" expanded="true" signature="65054:65069" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1051,7 +1077,7 @@
         <state relative-caret-position="1463">
           <caret line="77" column="41" lean-forward="false" selection-start-line="77" selection-start-column="41" selection-end-line="77" selection-end-column="41" />
           <folding>
-            <marker date="1489032639947" expanded="true" signature="65900:65915" ph="..." />
+            <marker date="1489033176400" expanded="true" signature="65054:65069" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1085,7 +1111,7 @@
         <state relative-caret-position="855">
           <caret line="45" column="41" lean-forward="false" selection-start-line="45" selection-start-column="41" selection-end-line="45" selection-end-column="41" />
           <folding>
-            <marker date="1489032639947" expanded="true" signature="65900:65915" ph="..." />
+            <marker date="1489033176400" expanded="true" signature="65054:65069" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1103,7 +1129,7 @@
         <state relative-caret-position="2546">
           <caret line="134" column="41" lean-forward="false" selection-start-line="134" selection-start-column="41" selection-end-line="134" selection-end-column="41" />
           <folding>
-            <marker date="1489032639947" expanded="true" signature="65900:65915" ph="..." />
+            <marker date="1489033176400" expanded="true" signature="65054:65069" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1161,18 +1187,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/testing/Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="912">
-          <caret line="61" column="20" lean-forward="false" selection-start-line="61" selection-start-column="20" selection-end-line="61" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/structure/tree/tree24/Tree24.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="385">
-          <caret line="286" column="52" lean-forward="true" selection-start-line="286" selection-start-column="52" selection-end-line="286" selection-end-column="52" />
+          <caret line="286" column="52" lean-forward="false" selection-start-line="286" selection-start-column="52" selection-end-line="286" selection-end-column="52" />
           <folding />
         </state>
       </provider>
@@ -1213,6 +1231,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
           <caret line="1" column="8" lean-forward="true" selection-start-line="1" selection-start-column="8" selection-end-line="1" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/testing/Test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="912">
+          <caret line="61" column="20" lean-forward="false" selection-start-line="61" selection-start-column="20" selection-end-line="61" selection-end-column="20" />
           <folding />
         </state>
       </provider>
