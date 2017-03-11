@@ -1,9 +1,6 @@
 package structure.tree.tree24;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 public class Tree24<K extends Comparable<K>, V> {
 
@@ -145,42 +142,33 @@ public class Tree24<K extends Comparable<K>, V> {
     /**
      * Delete the key and return its value if the key exists in the tree
      *
-     *  Case 1: is a leaf node?
-     *
-     *
-     *  Case 2: is underflow?
-     *
-     *  Case 3: immediate sibling has 2+ elements?
-     *
-     *  Case 4: After fusion, a parent of the node is underflow?
-     *
+     * NOTE: Deleting elements always starts from a leaf node (after swapping)
      */
     public V delete(K key) {
 
         Tree24Node target = getNode(key);
 
-        if (target == null)
+        if (target == null) // key is not found
             return null;
 
-        // is a leaf node?
-        if (!target.children.isEmpty()) { // no leaf node
-            target = swapKeyForRightmost(key, target);
-        }
+        Stack<Tree24Node> path = getPath(key);
 
-        // delete
-        V value = target.deleteElement(key);
+        if (!target.children.isEmpty())       // is a leaf node?
+            target = swapKeyForRightmost(key, target, path);
 
-        // is underflow?
-        if (target.keys.isEmpty())
-            resolveUnderflow(target);
+        V value = target.deleteKeyValue(key); // delete
 
+        if (target.keys.isEmpty())            // is underflow?
+            resolveUnderflow(path);
 
+        size--;
         return value;
     }
 
 
     /**
-     * swap the key for the rightmost key and return the node had the rightmost
+     * Swap the key for the rightmost key and stack nodes to rightmost key
+     * return a leaf node that had the rightmost key
      *
      * Node     A X Z        A Y Z
      *         | | | |      | | | |
@@ -188,48 +176,201 @@ public class Tree24<K extends Comparable<K>, V> {
      *            \            \
      *          (...Y)       (...X)  <-- swap X for Y and return the node
      */
-    private Tree24Node swapKeyForRightmost(K key, Tree24Node node) {
-        return null;
+    private Tree24Node swapKeyForRightmost(K key, Tree24Node node,
+                                           Stack<Tree24Node> path) {
+
+        int index = node.indexOf(key);
+        Tree24Node rightmostNode = node.children.get(index);
+        path.add(rightmostNode);
+
+        while (!rightmostNode.children.isEmpty()) {
+            rightmostNode = rightmostNode.children.getLast();
+            path.add(rightmostNode);
+        }
+
+        // swap key and value
+        K tempKey = rightmostNode.keys.pollLast();
+        V tempValue = rightmostNode.values.pollLast();
+
+        rightmostNode.keys.addLast(node.keys.get(index));
+        rightmostNode.values.addLast(node.values.get(index));
+
+        node.keys.set(index, tempKey);
+        node.values.set(index, tempValue);
+
+        return rightmostNode;
     }
 
+    /**
+     * Resolve underflow along the path stack
+     *
+     * 1. Deleting the last element in a node
+     * 2. Merging keys from the singleton parent node
+     */
     private void resolveUnderflow(Stack<Tree24Node> path) {
-        // Has a sibling node?
-        Tree24Node node = path.
 
+        Tree24Node node = path.pop();
+        Tree24Node child = null;      // store a child node after merging
+
+        while (node.keys.isEmpty()) { // check underflow
+            node.children.clear();    // clear children
+
+            if (path.isEmpty()) {     // node is root
+                root = child;
+                break;
+            }
+
+            Tree24Node parent = path.peek();
+
+            if (transfer(parent, node, child))  // true, if it's transferred
+                break;
+
+            child = merge(parent, node, child); // return merged child node
+            node = path.pop(); // check the parent for the next
+        }
+    }
+    /**
+     * When the node has an immediate sibling(2~3 elements)
+     *
+     * nodeIndex         0 1
+     *                  (C D)
+     * parentIndex    0/ 1| 2\
+     * siblings   (..A)  (-)  (F..)
+     *                |   |   |
+     *                B  (*)  E
+     *
+     *   transfer from left      transfer from right
+     *         (A D)                   (C F)
+     *        /  |  \                 /  |  \
+     *    (..)  (C)  (F..)       (..A)  (D)  (..)
+     *         /  \  |                  / \
+     *        B  (*) E                (*) E
+     *
+     * Transfer elements from a sibling that has 2~3 elements.
+     * If the node is a leaf a child node must be null.
+     */
+    private boolean transfer(Tree24Node parent, Tree24Node node,
+                             Tree24Node child) {
+        /*
+         *  parentIndex    0 1 2
+         *  nodeIndex     0 1 2 3
+         *
+         *  If nodeIndex: 1, then
+         *  left sibling: nodeIndex - 1, parentIndex: nodeIndex - 1
+         *  right sibling: nodeIndex + 1, parentIndex: nodeIndex
+         */
+        int nodeIndex = parent.children.indexOf(node);
+        int parentIndex = nodeIndex - 1;
+
+        // transfer from left sibling
+        if (parentIndex >= 0 &&
+            parent.children.get(parentIndex).keys.size() > 1) {
+
+            Tree24Node leftSibling = parent.children.get(parentIndex);
+
+            // parent to node
+            node.keys.add(parent.keys.get(parentIndex));
+            node.values.add(parent.values.get(parentIndex));
+
+            // sibling to parent
+            parent.keys.set(parentIndex, leftSibling.keys.pollLast());
+            parent.values.set(parentIndex, leftSibling.values.pollLast());
+
+            if (child != null) { // If a child exist it's not a leaf node
+                node.children.add(leftSibling.children.pollLast());
+                node.children.add(child);
+            }
+            return true;
+        }
+
+        parentIndex = nodeIndex;
+
+        // transfer from right sibling
+        if (parentIndex < parent.keys.size() &&
+            parent.children.get(nodeIndex + 1).keys.size() > 1) {
+
+            Tree24Node rightSibling = parent.children.get(nodeIndex + 1);
+
+            // parent to node
+            node.keys.add(parent.keys.get(parentIndex));
+            node.values.add(parent.values.get(parentIndex));
+
+            // sibling to parent
+            parent.keys.set(parentIndex, rightSibling.keys.pollFirst());
+            parent.values.set(parentIndex, rightSibling.values.pollFirst());
+
+            if (child != null) { // If a child exists it's not a leaf node
+                node.children.add(child);
+                node.children.add(rightSibling.children.pollFirst());
+            }
+            return true;
+        }
+        return false;
     }
 
     /**
+     * When the node has no siblings(2~3 elements).
+     * (*) is a child node after merging.
+     *
+     * a single element   (B)        (B)
+     *                    / \        / \
+     *                  (-) (C)    (A) (-)
+     *                   |  / \    / \  |
+     *
+     *                   (-)         (-)
+     *                      \       /
+     *                (-) (B C)   (A B) (-)
+     *                    / | \   / | \
+     *                  (*)          (*)
+     *
+     *         0 1               0 1             0
+     * Steps  (C D)             (C D)           (D)
+     *        / | \             / |             / |
+     *     (A) (-) (F)  -->  (A) (F)  -->  (A C) (F)  left merge
+     *      0   1   2         0   1            |
+     *         (*)               (*)          (*)
+     *
+     *                                          (C)
+     *                                          / |
+     *                                -->    (A)  (D F)
+     *                                            |
+     *                                           (*)
+     *
+     * If the node is a leaf the child node must be null.
+     * Return a child node that is combined.
+     * After merging the parent can be underflow.
      *
      */
-    private void transfer(Tree24Node node, Tree24Node parent) {
+    private Tree24Node merge(Tree24Node parent, Tree24Node node,
+                             Tree24Node child) {
 
-    }
+        int nodeIndex = parent.children.indexOf(node); // get node's index
+        parent.children.remove(nodeIndex);  // remove a link to the node.
 
-    /**
-     * Node is underflow and has no siblings(2+ elements)
-     *
-     *  A B     A B     A B         B
-     * a b c   a - c   a b c   (a A) c
-     *
-     *   A     A         P             P  Q R
-     *  a b   a -        -            -  ? ? ?
-     *              (a A) -      (a A) - * * *  <-- leaf nodes
-     *
-     *   A     A         P
-     *  a b   - b        -
-     *                    (A b)
-     *
-     */
-    private boolean fusion(Tree24Node node, Tree24Node parent) {
+        if (nodeIndex > 0) { // left merge
 
-    }
+            Tree24Node leftSibling = parent.children.get(nodeIndex - 1);
 
+            leftSibling.keys.addLast(parent.keys.remove(nodeIndex - 1));
+            leftSibling.values.addLast(parent.values.remove(nodeIndex - 1));
 
-    /**
-     * Perform a transfer and fusion operation if the node is empty
-     */
-    public void validate(K key, Tree24Node node, List<Tree24Node> path) {
+            if (child != null)
+                leftSibling.children.addLast(child);
 
+            return leftSibling;
+
+        } else { // right merge
+
+            Tree24Node rightSibling = parent.children.get(nodeIndex);
+
+            rightSibling.keys.addFirst(parent.keys.remove(nodeIndex));
+            rightSibling.values.addFirst(parent.values.remove(nodeIndex));
+
+            if (child != null)
+                rightSibling.children.addFirst(child);
+
+            return rightSibling;
+        }
     }
 
     /**
@@ -238,6 +379,29 @@ public class Tree24<K extends Comparable<K>, V> {
     public int size() {
         return size;
     }
+
+    public void printStructure() {
+        if (root == null) {
+            System.out.println("The tree is empty");
+            return;
+        }
+
+        printStructure(0, Collections.singletonList(root));
+    }
+
+    private void printStructure(int level, List<Tree24Node> list) {
+
+        list.forEach(System.out::print);
+        System.out.println();
+
+        LinkedList<Tree24Node> queue = new LinkedList<>();
+
+        list.forEach(node -> node.children.forEach(queue::add));
+
+        if (!queue.isEmpty())
+            printStructure(level + 1, queue);
+    }
+
 
     /**
      * 2-3-4 Tree node
@@ -261,7 +425,7 @@ public class Tree24<K extends Comparable<K>, V> {
             return values.get(indexOf(key));
         }
 
-        private V deleteElement(K key) {
+        private V deleteKeyValue(K key) {
             int index = indexOf(key);
             keys.remove(index);
             return values.remove(index);
@@ -299,6 +463,13 @@ public class Tree24<K extends Comparable<K>, V> {
                 return null;
 
             return children.get(insertionPointOf(key));
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder("(");
+            keys.forEach(key -> sb.append(key).append(","));
+            return sb.append("\b)").toString();
         }
     }
 }
