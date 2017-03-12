@@ -18,13 +18,24 @@ public class MeanMedianMode {
      */
     public static double getMedian(int[] arr) {
 
-        int mid = arr.length / 2;
-
-        if ((arr.length & 1) == 1)
-            return arr[mid];
-        else
-            return (arr[mid - 1] + arr[mid]) / (double)2;
+        return getMedian(arr, 0, arr.length);
     }
+
+    /**
+     *  get median value from beginIndex to endIndex - -1.
+     *  Thus a length of the range is endIndex - beginIndex.
+     */
+    public static double getMedian(int[] arr, int beginIndex, int endIndex) {
+
+        int mid = (beginIndex + endIndex) / 2;
+
+        if ((endIndex - beginIndex & 1) == 1) // length is odd
+            return arr[mid];
+        else                                  // length is even
+            return (arr[mid - 1] + arr[mid]) / (double)2;
+
+    }
+
     /**
      *  get Mode (most occurrence) value in the array
      */
@@ -44,13 +55,12 @@ public class MeanMedianMode {
                     maxCount = count;
                     mode = previous;
                 }
-
                 count = 1;
             }
-
             previous = arr[i];
         }
-
         return mode;
     }
+
+
 }

@@ -28,7 +28,7 @@ public class Test {
     private static MemoryMXBean memoryMXBean = ManagementFactory.getMemoryMXBean();
 
     public static void main(String[] args) throws Exception{
-        test24Tree();
+        System.out.println(10 - 2 & 1);
     }
     public static void test24Tree() {
         Tree24<Integer, Integer> tree24 = new Tree24<>();
