@@ -204,6 +204,8 @@ public class Tree24<K extends Comparable<K>, V> {
     /**
      * Resolve underflow along the path stack
      *
+     * These 2 cases occur underflow
+     *
      * 1. Deleting the last element in a node
      * 2. Merging keys from the singleton parent node
      */
