@@ -1,23 +1,18 @@
 package testing;
 
-import structure.tree.avl.AVLTree;
+
+import com.sun.org.apache.bcel.internal.util.ByteSequence;
 import structure.tree.bst.BST;
 import structure.tree.tree24.Tree24;
 
-import java.io.File;
-import java.lang.management.ManagementFactory;
-import java.lang.management.MemoryMXBean;
+
+import java.io.ByteArrayInputStream;
 import java.math.BigInteger;
-import java.sql.*;
-import java.util.*;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.stream.Collectors;
+import java.security.MessageDigest;
+import java.util.Arrays;
+import java.util.Random;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
-
-import static sorting.heap.HeapSort.swap;
-
 
 public class Test {
 
@@ -25,10 +20,20 @@ public class Test {
     private static final int RANGE = 100000000;
     private static final int BUCKET_SIZE = 10;
     private static final int RADIX_SIZE = 10;
-    private static MemoryMXBean memoryMXBean = ManagementFactory.getMemoryMXBean();
 
     public static void main(String[] args) throws Exception{
-        System.out.println(10 - 2 & 1);
+        //System.out.println(BigInteger.valueOf(31).isProbablePrime(100));
+        MessageDigest md5 = java.security.MessageDigest.getInstance("SHA-256");
+        md5.update("HelloWorld".getBytes());
+        StringBuilder sb = new StringBuilder();
+        for (byte b : md5.digest())
+            sb.append(String.format("%02x", b));
+        System.out.println(sb);
+    }
+
+    public static int returnItself(int n) {
+        System.out.println(n);
+        return n;
     }
     public static void test24Tree() {
         Tree24<Integer, Integer> tree24 = new Tree24<>();
@@ -39,8 +44,9 @@ public class Test {
         tree24.printStructure();
 
         IntStream.of(arr).forEach(key -> System.out.println("key: " + key + ", " + tree24.delete(key)));
-
         System.out.println(tree24.size());
+
+
     }
 
 
@@ -61,10 +67,16 @@ public class Test {
         for (String k : bst.keys("F", "T"))
             System.out.println(k);
     }
+    static class Inner {
+        private class P {
+            private void method() {
+                System.out.println("p");
+            }
+        }
+    }
 
 
 }
-
 
 
 

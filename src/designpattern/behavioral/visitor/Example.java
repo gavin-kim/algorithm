@@ -2,30 +2,25 @@ package designpattern.behavioral.visitor;
 
 /**
  *  Purpose: Visitor lets you define a new method
- *           without changing the classes of components
+ *           without changing the classes of components (open/closed principle)
  *
- *              Engine                     * Visitor visits each components including Engine itself
- *                 |                                 has actions for each components
- *           AbstractEngine ------------>  AbstractEngine.acceptVisitor(Visitor visitor)
- *           |            |                -Camshaft  -> acceptVisitor(visitor); --> visitor.action(this);
- *    StandardEngine TurboEngine           -Piston    -> acceptVisitor(visitor); --> visitor.action(this);
- *                                         -SparkPlug -> acceptVisitor(visitor); --> visitor.action(this);
- *                                         -Engine    -> visitor.action(this);
- *
- *                Visitable
+ *                Visitable ------------------>  interface Visitable {
+ *                    |                              void acceptVisitor(Visitor visitor);
+ *      -----------------------------            }
  *      |        |        |         |
  *    Engine  Camshaft  Piston  SparkPlug
+ *      |
+ *    AbstractEngine
+ *      |        |
+ *    Standard Turbo
+ *    ------------------------------------------------
+ *    | @Override                                    |
+ *    | public void acceptVisitor(Visitor visitor) { |
+ *    |     visitor.action(this);                    |
+ *    | }                                            |
+ *    ------------------------------------------------
  *
- *    public interface Visitable {              * interface Visitable
- *        void acceptVisitor(Visitor visitor);  * Visitor can visit the visitable component
- *    }
- *
- *    @Override
- *    public void acceptVisitor(Visitor visitor) {  * Visitable component invokes action that the Visitor offers
- *        visitor.action(this);
- *    }
- *
- *    public interface EngineVisitor {          * Visitor has actions for each component
+ *    public interface Visitor {          * Visitor has actions for each component
  *        void action(Camshaft camshaft);
  *        void action(Engine engine);
  *        void action(Piston piston);

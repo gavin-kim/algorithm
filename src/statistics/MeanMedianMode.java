@@ -1,5 +1,7 @@
 package statistics;
 
+import java.lang.reflect.Method;
+
 public class MeanMedianMode {
 
     /**
@@ -61,6 +63,5 @@ public class MeanMedianMode {
         }
         return mode;
     }
-
 
 }

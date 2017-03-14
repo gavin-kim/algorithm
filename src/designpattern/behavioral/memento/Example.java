@@ -85,7 +85,7 @@ public class Example {
         System.out.println("Previous speed: " + speedo.getPreviousSpeed());
 
         // Restore the state of speedometer:
-        //        memento object has reference to speedometer and state.
+        // memento object has reference to speedometer and state.
         System.out.println("\nNow restoring state...");
         speedo = memento.restoreState();
         System.out.println("Current speed: " + speedo.getCurrentSpeed());
