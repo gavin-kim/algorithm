@@ -10,16 +10,54 @@
 ### Delete
 ![24TreeDeleteFlowchart](/images/24TreeDeleteFlowchart.png)
     
-### Transfer
- 
-         (C F)          (C F)          (- F)         (B F)              
-        /  |  \        /  |  \        /  | \        /  |  \
-      (A B) D   G    (A B) -   G    (A B) C  G    (A -) C   G   <--- always leaf nodes
-      
-### Fusion
+### Transfer: When the node has an immediate sibling(2~3 elements)
 
-       (B D F)        (B D F)           (D F)
-       / | | \        / | | \          /  |  \
-      A  C E  G      A  - E  G      (A B) E   G  
+    nodeIndex           0 1
+                       (C D)
+    parentIndex      0/ 1| 2\
+    siblings     (..A)  (-)  (F..)
+                     |   |   |
+                     B  (*)  E
+    
+     transfer from left      transfer from right
+           (A D)                   (C F)
+          /  |  \                 /  |  \
+      (..)  (C)  (F..)       (..A)  (D)  (..)
+            / \  |                  / \
+           B (*) E                (*)  E
+    
+    Transfer elements from a sibling that has 2~3 elements.
+    If the node is a leaf a child node must be null.
+      
+### Merge: When the node has no siblings(2~3 elements). 
+
+      (*) is a child node after merging.
+     
+      a single element   (B)        (B)
+                         / \        / \
+                       (-) (C)    (A) (-)
+                        |  / \    / \  |
+     
+                        (-)         (-)     <--- parent is underflow
+                           \       /
+                     (-) (B C)   (A B) (-)
+                         / | \   / | \
+                       (*)          (*)
+     
+              0 1               0 1             0
+      Steps  (C D)             (C D)           (D)
+             / | \             / |             / |
+          (A) (-) (F)  -->  (A) (F)  -->  (A C) (F)    left merge
+           0   1   2         0   1            |
+              (*)               (*)          (*)
+     
+                                               (C)
+                                               / |
+                                     -->    (A)  (D F) right merge
+                                                 |
+                                                (*)
+     
+      If the node is a leaf the child node must be null.
+      Return merged child node. After merging the parent can be underflow.
       
       
