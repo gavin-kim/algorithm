@@ -19,9 +19,21 @@
     Double-Red Violation: After insertion, 2 red nodes are liked directly.
 
 ### Case 1: Node x is black or null (rotate).
+
+* rotateRight(w)
+    
 ![DoubleRedViolation](/images/RedBlackTreeDoubleRedViolation1-1.png)
+
+* rotateLeft(v) and rotateRight(w)
+
 ![DoubleRedViolation](/images/RedBlackTreeDoubleRedViolation1-2.png)
+
+* rotateLeft(w)
+
 ![DoubleRedViolation](/images/RedBlackTreeDoubleRedViolation1-3.png)
+
+* rotateRight(v) and rotateLeft(w)
+
 ![DoubleRedViolation](/images/RedBlackTreeDoubleRedViolation1-4.png)
 
 ### Case 2: Node x is red (recolor)
