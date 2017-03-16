@@ -16,13 +16,14 @@
     
     A new node is always inserted as a leaf node.
     If a new node is root, color is black, otherwise red.
+    Double-Red Violation: After insertion, 2 red nodes are liked directly.
 
-## Double-Red Violation Case 1:
+### Case 1: Node x is black or null (rotate).
 ![DoubleRedViolation](/images/RedBlackTreeDoubleRedViolation1-1.png)
 ![DoubleRedViolation](/images/RedBlackTreeDoubleRedViolation1-2.png)
 ![DoubleRedViolation](/images/RedBlackTreeDoubleRedViolation1-3.png)
 ![DoubleRedViolation](/images/RedBlackTreeDoubleRedViolation1-4.png)
 
-## Double-Red Violation Case 2:
+### Case 2: Node x is red (recolor)
 ![DoubleRedViolation](/images/RedBlackTreeDoubleRedViolation2-1.png)
 ![DoubleRedViolation](/images/RedBlackTreeDoubleRedViolation2-2.png)
