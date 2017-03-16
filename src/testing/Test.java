@@ -28,6 +28,8 @@ public class Test {
         StringBuilder sb = new StringBuilder();
         for (byte b : md5.digest())
             sb.append(String.format("%02x", b));
+        boolean a = true;
+
         System.out.println(sb);
     }
 
