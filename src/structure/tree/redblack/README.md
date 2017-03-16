@@ -7,4 +7,4 @@
     3. If a node is red, then both its children are black.
     4. All leaf nodes have the same black depth.
     
-[!RedBlackTreeNode]("images/RedBlackTreeNode.png")
+[!RedBlackTreeNode](/images/RedBlackTreeNode.png)
