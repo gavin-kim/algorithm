@@ -7,4 +7,13 @@
     3. If a node is red, then both its children are black.
     4. All leaf nodes have the same black depth.
     
+    NOTE: red nodes always have a black parent 
+    
 ![RedBlackTreeNode](/images/RedBlackTreeNode.png)
+
+![DoubleRedViolation](/images/RedBlackTreeDoubleRedViolation1-1.png)
+![DoubleRedViolation](/images/RedBlackTreeDoubleRedViolation1-2.png)
+![DoubleRedViolation](/images/RedBlackTreeDoubleRedViolation1-3.png)
+![DoubleRedViolation](/images/RedBlackTreeDoubleRedViolation1-4.png)
+![DoubleRedViolation](/images/RedBlackTreeDoubleRedViolation2-1.png)
+![DoubleRedViolation](/images/RedBlackTreeDoubleRedViolation2-2.png)
