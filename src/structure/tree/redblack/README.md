@@ -18,7 +18,10 @@
     If a new node is root, color is black, otherwise red.
     Double-Red Violation: After insertion, 2 red nodes are liked directly.
 
-### Case 1: Node x is black or null (rotate).
+![DoubleRedInsertion](/images/RedBlackTreeInsertion.png)
+![DoubleRedInsertion](/images/RedBlackTreeInsertion2.png)
+
+### Double-Red Violation: Node x is black or null (rotate). No need to fix
 
 * rotateRight(w)
     
@@ -36,6 +39,6 @@
 
 ![DoubleRedViolation](/images/RedBlackTreeDoubleRedViolation1-4.png)
 
-### Case 2: Node x is red (recolor)
+### Double-Red Violation: Node x is red (recolor). Need to check and fix again
 ![DoubleRedViolation](/images/RedBlackTreeDoubleRedViolation2-1.png)
 ![DoubleRedViolation](/images/RedBlackTreeDoubleRedViolation2-2.png)

@@ -29,59 +29,118 @@ public class RedBlackTree <K extends Comparable<K>, V>  {
     }
 
     public V delete(K key) {
-        return null
+        return null;
     }
 
     /**
-     *    p             r
+     *    p             x
      *   / \           / \
-     *  x  r    ->    p  z
+     *  a  x    ->    p  c
      *    / \        / \
-     *   y  z       x  y
+     *   b  c       a  b
      */
-    private void rotateLeft(Node p) {
+    private void rotateLeft(Node parent) {
 
-        Node r = p.right;
-        p.right = r.left;
+        Node node = parent.right;
 
-        if (r.left != null)
-            r.left.parent = p;
+        parent.right = node.left;    // relocate b
+        if (parent.right != null)
+            parent.right.parent = parent;
 
-        r.parent = p.parent;
-        if (p.parent == null)
-            root = r;
-        else if (p.parent.left == p) // p is a left child
-            p.parent.left = r;
+        node.parent = parent.parent; // grand parent's pointer
+        if (node.parent == null)
+            root = node;
+        else if (parent.parent.left == parent)
+            parent.parent.left = node;
         else
-            p.parent.right = r;
+            parent.parent.right = node;
 
-        r.left = p;
-        p.parent = r;
+        node.left = parent;
+        parent.parent = node;
     }
 
     /**
-     *      p            l
+     *      p            x
      *     / \          / \
-     *    l  z   ->    x   p
+     *    x  c   ->    a   p
      *   / \              / \
-     *  x  y             y  z
+     *  a  b             b  c
      */
-    private void rotateRight(Node p) {
-        Node l = p.left;
+    private void rotateRight(Node parent) {
 
-        p.left = l.right;
-        if (p.left != null)
-            p.left.parent = p;
+        Node node = parent.left;
 
-        l.parent = p.parent;
-        if (p.parent == null)
-            root = l;
-        else if (p.parent.left == p)
-            p.parent.left = l;
+        parent.left = node.right;      // relocate b
+        if (parent.left != null)
+            parent.left.parent = parent;
+
+        node.parent = parent.parent;   // grand parent's pointer
+        if (node.parent == null)
+            root = node;
+        else if (parent.parent.left == parent)
+            parent.parent.left = node;
         else
-            p.parent.right = l;
+            parent.parent.right = node;
 
-        l.right = p;
-        p.parent = l;
+        node.right = parent;
+        parent.parent = node;
+    }
+
+    /**
+     *       B              *R
+     *      / \             / \
+     *     R  R    ->     *B *B
+     *    /               /
+     *   R(x)            R(x)
+     */
+    private void recolor(Node node, Node uncle) {
+        node.parent.color = BLACK;      // parent
+        node.parent.parent.color = RED; // grand parent
+        uncle.color = BLACK; // uncle
+    }
+
+
+    public void fixAfterInsertion(Node node) {
+        node.color = RED;
+
+        // If a parent color is red, it has its parent (black)
+        while (node != null && node != root && node.parent.color == RED) {
+
+            if (node.parent == node.parent.parent.left) {
+                Node uncle = node.parent.parent.right;
+
+                if (uncle == null || uncle.color == BLACK) { // rotate
+                    if (node.parent.right == node) { // LR -> LL
+                        node = node.parent;
+                        rotateLeft(node);
+                    }
+                    node.parent.color = BLACK;
+                    node.parent.parent.color = RED;
+                    rotateRight(node.parent.parent); // node will be its parent
+
+                } else { // recolor
+                    recolor(node, uncle);
+                    node = node.parent.parent;
+                }
+
+            } else {
+                Node uncle = node.parent.parent.left;
+
+                if (uncle == null || uncle.color == BLACK) { // rotate
+                    if (node.parent.left == node) { // RL -> RR
+                        node = node.parent;
+                        rotateRight(node);
+                    }
+                    node.parent.color = BLACK;
+                    node.parent.parent.color = RED;
+                    rotateLeft(node.parent.parent); // node will be its parent
+
+                } else { // recolor
+                    recolor(node, uncle);
+                    node = node.parent.parent;
+                }
+            }
+        }
+        root.color = BLACK;
     }
 }
