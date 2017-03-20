@@ -21,7 +21,7 @@
 ![DoubleRedInsertion](/images/RedBlackTreeInsertion.png)
 ![DoubleRedInsertion](/images/RedBlackTreeInsertion2.png)
 
-### Double-Red Violation: Node x is black or null (rotate). No need to fix
+### Case 1: Node x is black or null (rotate). No need to fix
 
 * rotateRight(w)
     
@@ -39,6 +39,14 @@
 
 ![DoubleRedViolation](/images/RedBlackTreeDoubleRedViolation1-4.png)
 
-### Double-Red Violation: Node x is red (recolor). Need to check and fix again
+### Case 2: Node x is red (recolor). Need to check and fix again
 ![DoubleRedViolation](/images/RedBlackTreeDoubleRedViolation2-1.png)
 ![DoubleRedViolation](/images/RedBlackTreeDoubleRedViolation2-2.png)
+
+
+## Deletion
+
+### Double-Black Violation
+![DoubleBlackViolation](/images/RedBlackTreeDoubleBlackViolation.png)
+![DoubleBlackViolation](/images/RedBlackTreeDoubleBlackViolation2.png)
+
