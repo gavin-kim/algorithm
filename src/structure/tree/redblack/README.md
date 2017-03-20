@@ -46,7 +46,9 @@
 
 ## Deletion
 
-### Double-Black Violation
+### Double-Black Violation (Merge and Transfer)
 ![DoubleBlackViolation](/images/RedBlackTreeDoubleBlackViolation.png)
+
+### Steps to fix After Deletion 
 ![DoubleBlackViolation](/images/RedBlackTreeDoubleBlackViolation2.png)
 
