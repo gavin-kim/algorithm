@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="45351076-95b2-42e5-b58c-dc8be30c0baa" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/RedBlackTreeDoubleRedViolation1-3.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/RedBlackTreeDoubleRedViolation1-4.png" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/structure/tree/redblack/README.md" afterPath="$PROJECT_DIR$/src/structure/tree/redblack/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/structure/tree/redblack/RedBlackTree.java" afterPath="$PROJECT_DIR$/src/structure/tree/redblack/RedBlackTree.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/images/RedBlackTreeDoubleRedViolation1-1.png" afterPath="$PROJECT_DIR$/images/RedBlackTreeDoubleRedViolation1-2.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/images/RedBlackTreeDoubleRedViolation1-2.png" afterPath="$PROJECT_DIR$/images/RedBlackTreeDoubleRedViolation1-1.png" />
     </list>
     <ignored path="$PROJECT_DIR$/output/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -80,8 +83,8 @@
         <entry file="file://$PROJECT_DIR$/src/structure/tree/redblack/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="-76">
-                <caret line="41" column="40" lean-forward="false" selection-start-line="41" selection-start-column="40" selection-end-line="41" selection-end-column="40" />
+              <first_editor relative-caret-position="437">
+                <caret line="29" column="34" lean-forward="true" selection-start-line="29" selection-start-column="34" selection-end-line="29" selection-end-column="34" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -854,12 +857,12 @@
       <workItem from="1489499901932" duration="2799000" />
       <workItem from="1489614253641" duration="18810000" />
       <workItem from="1489775370695" duration="28647000" />
-      <workItem from="1490121933148" duration="6326000" />
+      <workItem from="1490121933148" duration="6588000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="186068000" />
+    <option name="totallyTimeSpent" value="186330000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="0" />
@@ -1304,8 +1307,8 @@
     <entry file="file://$PROJECT_DIR$/src/structure/tree/redblack/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="-76">
-            <caret line="41" column="40" lean-forward="false" selection-start-line="41" selection-start-column="40" selection-end-line="41" selection-end-column="40" />
+          <first_editor relative-caret-position="437">
+            <caret line="29" column="34" lean-forward="true" selection-start-line="29" selection-start-column="34" selection-end-line="29" selection-end-column="34" />
             <folding />
           </first_editor>
           <second_editor />
