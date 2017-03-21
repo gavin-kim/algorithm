@@ -1,34 +1,29 @@
-Blpackage structure.tree.redblack;
+package structure.tree.redblack;
 
-public class RedBlackTree <K extends Comparable<K>, V>  {
+import structure.tree.bst.BST;
 
-    private Node root;
-    private int size;
+public class RedBlackTree <K extends Comparable<K>, V> extends BST<K, V> {
 
     private static final boolean RED = false;
     private static final boolean BLACK = true;
 
-    private class Node {
+    private class Node extends BST<K, V>.Node {
 
-        K key;
-        V value;
         Node left;
         Node right;
         Node parent;
         boolean color;
 
         Node(K key, V value, Node parent) {
+            super(key, value);
             this.key = key;
             this.value = value;
             this.parent = parent;
         }
     }
 
+    @Override
     public V put(K key, V value) {
-        return null;
-    }
-
-    public V delete(K key) {
         return null;
     }
 
@@ -141,85 +136,20 @@ public class RedBlackTree <K extends Comparable<K>, V>  {
                 }
             }
         }
-        root.color = BLACK;
+        ((Node) root).color = BLACK;
     }
 
-    /**
-     * Case 1: Node is red
-     *
-     * P(B)      P(B)
-     *   |        |
-     * N(R)  ->  N(x)  just delete the node
-     *   |
-     * C(x)
-     *
-     * */
-    private void case1(Node node) {
+    @Override
+    public V delete(K key) {
+        Node node = (Node)getNode(key);
 
+        if (node == null)
+            return null;
+
+        if (node.color ==)
     }
 
-    /**
-     * Case 2: Node is black and its child is red
-     *
-     * P(x)      P(x)
-     *   |         |
-     * N(B)  ->  N(B)  keep black to maintain black-depth
-     *   |
-     * C(R)
-     *
-     * */
-    private void case2(Node node) {
-
-    }
-
-    /**
-     * Case 3: Double-Black Problem
-     *
-     * P(x)     B       B         B         B
-     *   |     / \     / \       / \      /   \
-     * N(B)   B  B    B  R      R  B     R    R
-     *   |              / \    / \      / \  / \
-     * C(B)            B  B   B  B     B  B B  B
-     *
-     *
-     * 1. Sibling is RED
-     *
-     *       P(B)               (B)                        In 24Tree
-     *      /   \               / \
-     *   N(B) S(R)   --->    P(R) B                         B R          R B
-     *         / \           /  \                          | | |   ==   | | |
-     *        B  B        N(B) S(B) <-- new sibling        B B B        B B B
-     *
-     *
-     * NOTE: Now sibling is always black. Check sibling's children.
-     *
-     * 2. Sibling's children are Black-Black -> decrease sibling's Black-Depth
-     *    (It's similar to merge in 24Tree)
-     *
-     *      ?            ?  <--- need to check x.parent
-     *     / \          / \
-     *    x  B   -->   x  R
-     *      / \          / \
-     *     B  B         B  B
-     *
-     * 3. Make Sibling's
-     *
-     *      ?            ?             ?
-     *     / \          / \           / \
-     *    x  B   -->   x  R*   -->   x  B*  <-- a new sibling
-     *      / \          / \           / \
-     *     R  B         B* B          a  R*
-     *                 / \              / \
-     *                a  b             b  B
-     *
-     * 4.   ?            B*              ?*              ?              ?
-     *     / \          / \             / \             / \  transfer  / \
-     *    x  B   -->   x  ?*    -->    B* B*           x  B    -->    B  B
-     *      / \          / \          / \                | |         | |
-     *     a  R         a  B*        x  a                a R         x a
-     *
-     * */
-    private void case3(Node node) {
+    private void fixAfterDeletion(Node node) {
 
     }
 }

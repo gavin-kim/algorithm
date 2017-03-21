@@ -46,7 +46,28 @@
 
 ## Deletion
 
-### Double-Black Violation (Merge and Transfer)
+### Case 1: Node is RED
+
+    1. Remove the node and link its child to parent.
+
+        P         P
+        |         |
+        R  -->  C(B)
+       / \
+    C(B)  null (rightmost)    
+
+### Case 2: Node is BLACK and its child is RED.
+
+    1. Change child's color to BLACK to maintain Black-Depth.
+    2. Remove the node and link its child to parent.
+
+        P         P       
+        |         |      
+        B  -->  C(B)      
+       / \           
+    C(R)  null (rightmost)
+
+### Case 3: Double-Black Violation (Merge and Transfer)
 ![DoubleBlackViolation](/images/RedBlackTreeDoubleBlackViolation.png)
 
 ### Steps to fix After Deletion 
