@@ -21,7 +21,7 @@
 ![DoubleRedInsertion](/images/RedBlackTreeInsertion.png)
 ![DoubleRedInsertion](/images/RedBlackTreeInsertion2.png)
 
-### Case 1: Uncle node x is BLACK or Null (rotate).
+### Double-Red Violation 1: Uncle node x is BLACK or Null (rotate).
 
 * rotateRight(w)
     
@@ -32,7 +32,7 @@
 ![DoubleRedViolation](/images/RedBlackTreeDoubleRedViolation1-2.png)
 
 
-### Case 2: Uncle node x is red (recolor). Need to check again
+### Double-Red Violation 2: Uncle node x is red (recolor). Need to check again
 ![DoubleRedViolation](/images/RedBlackTreeDoubleRedViolation2-1.png)
 ![DoubleRedViolation](/images/RedBlackTreeDoubleRedViolation2-2.png)
 
