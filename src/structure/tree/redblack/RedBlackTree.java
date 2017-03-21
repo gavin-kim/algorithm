@@ -22,9 +22,20 @@ public class RedBlackTree <K extends Comparable<K>, V> extends BST<K, V> {
         }
     }
 
-    @Override
-    public V put(K key, V value) {
-        return null;
+    /***/
+    public Node successor(Node node) {
+        if (node == null)
+            return null;
+        else if (node.right != null) {
+            node = node.right;
+            while (node.left != null)
+                node = node.left;
+            return node;
+        } else {
+            while (node.parent != null && node == node.parent.right)
+                node = node.parent;
+            return node.parent;
+        }
     }
 
     /**
@@ -53,6 +64,12 @@ public class RedBlackTree <K extends Comparable<K>, V> extends BST<K, V> {
         node.left = parent;
         parent.parent = node;
     }
+
+    @Override
+    public V put(K key, V value) {
+        return null;
+    }
+
 
     /**
      *      p            x
@@ -94,7 +111,7 @@ public class RedBlackTree <K extends Comparable<K>, V> extends BST<K, V> {
         uncle.color = BLACK; // uncle
     }
 
-
+    /** Fix Double-Red violation */
     public void fixAfterInsertion(Node node) {
         node.color = RED;
 
@@ -142,11 +159,33 @@ public class RedBlackTree <K extends Comparable<K>, V> extends BST<K, V> {
     @Override
     public V delete(K key) {
         Node node = (Node)getNode(key);
+        Node child = null;
 
         if (node == null)
             return null;
 
-        if (node.color ==)
+        if (node.left == null) {          // left child is null
+            child = node.right;
+            transplant(node, node.right);
+        } else if (node.right == null)  { // right child is null
+            child = node.left;
+            transplant(node, node.left);
+        } else {                          // the node has both
+
+        }
+        return null;
+    }
+
+    /** Remove the node and connect its child with parent */
+    private void transplant(Node node, Node child) {
+        if (node.parent == null)
+            root = child;
+        else if (node == node.parent.left)
+            node.parent.left = child;
+        else
+            node.parent.right = child;
+
+        child.parent = node.parent;
     }
 
     private void fixAfterDeletion(Node node) {
