@@ -31,13 +31,6 @@
 
 ![DoubleRedViolation](/images/RedBlackTreeDoubleRedViolation1-2.png)
 
-* rotateLeft(w)
-
-![DoubleRedViolation](/images/RedBlackTreeDoubleRedViolation1-3.png)
-
-* rotateRight(v) and rotateLeft(w)
-
-![DoubleRedViolation](/images/RedBlackTreeDoubleRedViolation1-4.png)
 
 ### Case 2: Uncle node x is red (recolor). Need to check again
 ![DoubleRedViolation](/images/RedBlackTreeDoubleRedViolation2-1.png)
