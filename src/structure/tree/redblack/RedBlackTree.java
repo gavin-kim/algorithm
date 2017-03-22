@@ -1,29 +1,105 @@
 package structure.tree.redblack;
 
-import structure.tree.bst.BST;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Stack;
 
-public class RedBlackTree <K extends Comparable<K>, V> extends BST<K, V> {
+public class RedBlackTree <K extends Comparable<K>, V> {
+
+    private Node root;
+    private int size;
 
     private static final boolean RED = false;
     private static final boolean BLACK = true;
 
-    private class Node extends BST<K, V>.Node {
+    class Node {
 
+        K key;
+        V value;
         Node left;
         Node right;
         Node parent;
-        boolean color;
+        boolean color = BLACK;
 
         Node(K key, V value, Node parent) {
-            super(key, value);
             this.key = key;
             this.value = value;
             this.parent = parent;
         }
+
+        @Override
+        public String toString() {
+            return String.format("Key: %s, Value: %s, Color: %s", key, value,
+                color ? "BLACK" : "RED");
+        }
     }
 
-    /***/
-    public Node successor(Node node) {
+    public int size() {
+        return size;
+    }
+
+    public V get(K key) {
+        Node node = getNode(key);
+
+        return node == null ? null : node.value;
+    }
+
+    public Node getNode(K key) {
+
+        Node node = root;
+
+        while (node != null) {
+            int cmp = key.compareTo(node.key);
+
+            if (cmp < 0) node = node.left;   // go left: key is less
+            else if (cmp > 0) node = node.right;  // go right: key is greater
+            else return node;  // find a key
+        }
+
+        return null;
+    }
+
+    public V put(K key, V value) {
+
+        if (root == null) {
+            root = new Node(key, value, null);
+            size = 1;
+            return null;
+        }
+
+        Node node = root;
+        Node parent = root.parent;
+
+        while (node != null) {
+
+            int cmp = key.compareTo(node.key);
+            parent = node;
+
+            if (cmp < 0) {
+                node = node.left;
+            } else if (cmp > 0) {
+                node = node.right;
+            } else {
+                V oldValue = node.value;
+                node.value = value;
+                return oldValue;
+            }
+        }
+
+        Node newNode = new Node(key, value, parent);
+        if (key.compareTo(parent.key) < 0)
+            parent.left = newNode;
+        else
+            parent.right = newNode;
+
+        fixAfterInsertion(newNode);
+        size++;
+        return null;
+    }
+
+    /** Returns the successor of the specified Node, or null */
+    private Node successor(Node node) {
         if (node == null)
             return null;
         else if (node.right != null) {
@@ -33,6 +109,22 @@ public class RedBlackTree <K extends Comparable<K>, V> extends BST<K, V> {
             return node;
         } else {
             while (node.parent != null && node == node.parent.right)
+                node = node.parent;
+            return node.parent;
+        }
+    }
+
+    /** Returns the predecessor of the specified Node, or null */
+    private Node predecessor(Node node) {
+        if (node == null)
+            return null;
+        else if (node.left != null) {
+            node = node.left;
+            while (node.right != null)
+                node = node.right;
+            return node;
+        } else {
+            while (node.parent != null && node == node.parent.left)
                 node = node.parent;
             return node.parent;
         }
@@ -64,12 +156,6 @@ public class RedBlackTree <K extends Comparable<K>, V> extends BST<K, V> {
         node.left = parent;
         parent.parent = node;
     }
-
-    @Override
-    public V put(K key, V value) {
-        return null;
-    }
-
 
     /**
      *      p            x
@@ -153,30 +239,21 @@ public class RedBlackTree <K extends Comparable<K>, V> extends BST<K, V> {
                 }
             }
         }
-        ((Node) root).color = BLACK;
+        root.color = BLACK;
     }
 
-    @Override
     public V delete(K key) {
-        Node node = (Node)getNode(key);
-        Node child = null;
+        Node node = getNode(key);
 
         if (node == null)
             return null;
 
-        if (node.left == null) {          // left child is null
-            child = node.right;
-            transplant(node, node.right);
-        } else if (node.right == null)  { // right child is null
-            child = node.left;
-            transplant(node, node.left);
-        } else {                          // the node has both
-
-        }
-        return null;
+        V value = node.value;
+        deleteNode(node);
+        return value;
     }
 
-    /** Remove the node and connect its child with parent */
+    /** Remove the node and Link child to parent */
     private void transplant(Node node, Node child) {
         if (node.parent == null)
             root = child;
@@ -185,10 +262,126 @@ public class RedBlackTree <K extends Comparable<K>, V> extends BST<K, V> {
         else
             node.parent.right = child;
 
-        child.parent = node.parent;
+        if (child != null)
+            child.parent = node.parent;
+    }
+
+    private void deleteNode(Node node) {
+        size--;
+        Node child;
+
+        if (node.left == null) {          // left child is null
+            child = node.right;
+        } else if (node.right == null) {  // right child is null
+            child = node.left;
+        } else {                          // the node has both
+            Node successor = successor(node);
+            node.key = successor.key;     // copy successor's key
+            node.value = successor.value; // copy successor's value
+            node = successor;             // change node to successor
+            // successor can't be null because the node has left and right.
+            child = successor.left != null ? successor.left : successor.right;
+        }
+
+        if (node.color == BLACK)
+            if (child == null)           // No children.
+                fixAfterDeletion(node);  // Use self as phantom
+            else
+                fixAfterDeletion(child);
+
+        transplant(node, child);
     }
 
     private void fixAfterDeletion(Node node) {
+        while (node != root && node.color == BLACK) {
+            if (node == node.parent.left) {
+                Node sib = node.parent.right;
 
+                if (sib.color == RED) {
+                    sib.color = BLACK;
+                    node.parent.color = RED;
+                    rotateLeft(node.parent);
+                    sib = node.parent.right;
+                }
+
+                if ((sib.left == null || sib.left.color == BLACK) && // Merge
+                    (sib.right == null || sib.right.color == BLACK)) {
+                    sib.color = RED;
+                    node = node.parent;
+
+                } else { // Transfer
+                    if (sib.right == null || sib.right.color == BLACK) {
+                        sib.left.color = BLACK;
+                        sib.color = RED;
+                        rotateRight(sib);
+                        sib = node.parent.right;
+                    }
+                    sib.right.color = BLACK;
+                    sib.color = node.parent.color;
+                    node.parent.color = BLACK;
+                    rotateLeft(node.parent);
+                    node = root;
+                }
+
+            } else {
+                Node sib = node.parent.left;
+
+                if (sib.color == RED) {
+                    sib.color = BLACK;
+                    node.parent.color = RED;
+                    rotateRight(node.parent);
+                    sib = node.parent.left;
+                }
+
+                if ((sib.left == null || sib.left.color == BLACK) && // Merge
+                    (sib.right == null || sib.right.color == BLACK)) {
+                    sib.color = RED;
+                    node = node.parent;
+
+                } else { // Transfer
+                    if (sib.left == null ||
+                        sib.left.color == BLACK) {
+                        sib.right.color = BLACK;
+                        sib.color = RED;
+                        rotateLeft(sib);
+                        sib = node.parent.left;
+                    }
+                    sib.left.color = BLACK;
+                    sib.color = node.parent.color;
+                    node.parent.color = BLACK;
+                    rotateRight(node.parent);
+                    node = root;
+                }
+            }
+        }
+        node.color = BLACK;
+    }
+
+    private boolean validateNode(Node node) {
+        return (node.color == RED) && (node.parent.color == RED);
+    }
+
+    public void validateTree() {
+        if (root == null || size == 1)
+            return;
+
+        List<Node> nodes = new ArrayList<>();
+        if (root.left != null) nodes.add(root.left);
+        if (root.right != null) nodes.add(root.right);
+
+
+        while (!nodes.isEmpty()) {
+            List<Node> nodeList = new ArrayList<>(nodes.size() * 3);
+
+            nodes.forEach(node -> {
+
+                if (validateNode(node))
+                    System.out.println((node.color ? "BLACK" : "RED") + " : " + (node.parent.color ? "BLACK" : "RED"));
+                if (node.left != null) nodeList.add(node.left);
+                if (node.right != null) nodeList.add(node.right);
+            });
+
+            nodes = nodeList;
+        }
     }
 }

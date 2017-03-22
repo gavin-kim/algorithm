@@ -12,7 +12,6 @@ public class Tree24<K extends Comparable<K>, V> {
      */
     public V get(K key) {
         Tree24Node found = getNode(key);
-
         if (found != null)
             return found.getValue(key);
 

@@ -23,3 +23,4 @@ public class IsBinarySearchTree {
             checkBST(node.right, node.data, max);
     }
 }
+

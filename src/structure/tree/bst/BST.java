@@ -4,16 +4,16 @@ import java.util.*;
 
 public class BST<K extends Comparable<K>, V> {
 
-    protected Node root;
-    protected int size;
+    private Node root;
+    private int size;
 
-    protected class Node {
-        protected K key;
-        protected V value;
-        protected Node left;
-        protected Node right;
+    class Node {
+        K key;
+        V value;
+        Node left;
+        Node right;
 
-        protected Node(K key, V value) {
+        Node(K key, V value) {
             this.key = key;
             this.value = value;
         }
@@ -71,9 +71,9 @@ public class BST<K extends Comparable<K>, V> {
             else if (cmp > 0) // go right
                 node = node.right;
             else { // find the key and change value
-                V previous = node.value;
+                V oldValue = node.value;
                 node.value = value;
-                return previous;
+                return oldValue;
             }
         }
 

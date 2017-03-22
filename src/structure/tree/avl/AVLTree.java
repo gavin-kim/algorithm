@@ -1,17 +1,23 @@
 package structure.tree.avl;
 
-import structure.tree.bst.BST;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class AVLTree<K extends Comparable<K>, V> extends BST<K, V> {
+public class AVLTree<K extends Comparable<K>, V> {
 
-    protected class AVLNode extends Node {
-        public int height; // in order to balance the tree
+    private Node root;
+    private int size;
 
-        public AVLNode(K key, V value) {
-            super(key, value);
+    protected class Node {
+        K key;
+        V value;
+        Node left;
+        Node right;
+        int height; // in order to balance the tree
+
+        Node(K key, V value) {
+            this.key = key;
+            this.value = value;
         }
 
         @Override
@@ -20,7 +26,6 @@ public class AVLTree<K extends Comparable<K>, V> extends BST<K, V> {
         }
     }
 
-    @Override
     public V put(K key, V value) {
 
         Node parent = null;
@@ -45,13 +50,13 @@ public class AVLTree<K extends Comparable<K>, V> extends BST<K, V> {
             }
         }
 
-        if (parent == null) root = new AVLNode(key, value);
+        if (parent == null) root = new Node(key, value);
         else if (key.compareTo(parent.key) < 0) {
-            parent.left = new AVLNode(key, value);
+            parent.left = new Node(key, value);
             balanceFrom(parent.key); // balance from the node to root
         }
         else {
-            parent.right = new AVLNode(key, value);
+            parent.right = new Node(key, value);
             balanceFrom(parent.key); // balance from the node to root
         }
 
@@ -59,7 +64,6 @@ public class AVLTree<K extends Comparable<K>, V> extends BST<K, V> {
         return null;
     }
 
-    @Override
     public V delete(K key) {
 
         Node parent = null;
@@ -122,32 +126,32 @@ public class AVLTree<K extends Comparable<K>, V> extends BST<K, V> {
     }
 
     public int getHeight() {
-        return ((AVLNode) root).height;
+        return ( root).height;
     }
 
 
 
     // Reset the height of the specified node.
-    private void updateHeight(AVLNode node) {
+    private void updateHeight(Node node) {
         if (node.left == null && node.right == null)
             node.height = 0;
         else if (node.left == null)
-            node.height = 1 + ((AVLNode) node.right).height;
+            node.height = 1 + ( node.right).height;
         else if (node.right == null)
-            node.height = 1 + ((AVLNode) node.left).height;
+            node.height = 1 + ( node.left).height;
         else
             node.height = 1 +
-                Math.max(((AVLNode) node.left).height, ((AVLNode) node.right).height);
+                Math.max(( node.left).height, ( node.right).height);
     }
 
     // O(2log n) Balances the nodes in the path from the node to the root (bottom-up)
     private void balanceFrom(K key) {
 
-        List<AVLNode> path = getPathTo(key); // O(log n)
+        List<Node> path = getPathTo(key); // O(log n)
 
         for (int i = path.size() - 1; i >= 0; i--) { // O(log n) bottom up
-            AVLNode node = path.get(i);
-            AVLNode parent = node == root ? null : path.get(i - 1);
+            Node node = path.get(i);
+            Node parent = node == root ? null : path.get(i - 1);
 
             updateHeight(node);     // O(1) update height
             balance(node, parent);  // O(1) balance
@@ -155,13 +159,13 @@ public class AVLTree<K extends Comparable<K>, V> extends BST<K, V> {
     }
 
     // O(log n) get a path from root to a node that has a key
-    private List<AVLNode> getPathTo(K key) {
-        List<AVLNode> path = new ArrayList<>();
+    private List<Node> getPathTo(K key) {
+        List<Node> path = new ArrayList<>();
 
         Node node = root;
 
         while (node != null) {
-            path.add((AVLNode)node);
+            path.add(node);
 
             int cmp = key.compareTo(node.key);
 
@@ -173,28 +177,28 @@ public class AVLTree<K extends Comparable<K>, V> extends BST<K, V> {
     }
 
     // Return the balance factor of the node (right height - left height)
-    private int balanceFactor(AVLNode node) {
+    private int balanceFactor(Node node) {
         if (node.right == null)
             return -node.height;
         else if (node.left == null)
             return +node.height;
         else
-            return ((AVLNode)node.right).height - ((AVLNode)node.left).height;
+            return (node.right).height - (node.left).height;
     }
 
     // balance the node, node and parent must not null
     private void balance(Node node, Node parent) {
-        switch (balanceFactor((AVLNode)node)) {
+        switch (balanceFactor(node)) {
 
             case -2: // L
-                if (balanceFactor((AVLNode)node.left) < 0)
+                if (balanceFactor(node.left) < 0)
                     balanceLL(node, parent); // LL -2, -
                 else
                     balanceLR(node, parent); // LR -2, +
             break;
 
             case +2: // R
-                if (balanceFactor((AVLNode)node.right) > 0)
+                if (balanceFactor(node.right) > 0)
                     balanceRR(node, parent); // RR +2, +
                 else
                     balanceRL(node, parent); // RL +2, -
@@ -226,8 +230,8 @@ public class AVLTree<K extends Comparable<K>, V> extends BST<K, V> {
         else if (parent.left == node) parent.left = child;
         else parent.right = child;
 
-        updateHeight((AVLNode)node);   // lower first
-        updateHeight((AVLNode)child);
+        updateHeight(node);   // lower first
+        updateHeight(child);
     }
 
 
@@ -260,9 +264,9 @@ public class AVLTree<K extends Comparable<K>, V> extends BST<K, V> {
         else if (parent.left == node) parent.left = grand;
         else parent.right = grand;
 
-        updateHeight((AVLNode) child); // lower first
-        updateHeight((AVLNode) node);
-        updateHeight((AVLNode) grand);
+        updateHeight( child); // lower first
+        updateHeight( node);
+        updateHeight( grand);
     }
 
     // Perform RR balance: balance factor +2, +
@@ -277,8 +281,8 @@ public class AVLTree<K extends Comparable<K>, V> extends BST<K, V> {
         else parent.right = child;
 
 
-        updateHeight((AVLNode)node);
-        updateHeight((AVLNode)child);
+        updateHeight(node);
+        updateHeight(child);
     }
 
     // Perform RL balance: balance factor +2, -
@@ -296,8 +300,8 @@ public class AVLTree<K extends Comparable<K>, V> extends BST<K, V> {
         else if (parent.left == node) parent.left = grand;
         else parent.right = grand;
 
-        updateHeight((AVLNode) child);
-        updateHeight((AVLNode) node);
-        updateHeight((AVLNode) grand);
+        updateHeight( child);
+        updateHeight( node);
+        updateHeight( grand);
     }
 }

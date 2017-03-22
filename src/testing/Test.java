@@ -3,6 +3,7 @@ package testing;
 
 import com.sun.org.apache.bcel.internal.util.ByteSequence;
 import structure.tree.bst.BST;
+import structure.tree.redblack.RedBlackTree;
 import structure.tree.tree24.Tree24;
 
 
@@ -22,15 +23,7 @@ public class Test {
     private static final int RADIX_SIZE = 10;
 
     public static void main(String[] args) throws Exception{
-        //System.out.println(BigInteger.valueOf(31).isProbablePrime(100));
-        MessageDigest md5 = java.security.MessageDigest.getInstance("SHA-256");
-        md5.update("HelloWorld".getBytes());
-        StringBuilder sb = new StringBuilder();
-        for (byte b : md5.digest())
-            sb.append(String.format("%02x", b));
-        boolean a = true;
-
-        System.out.println(sb);
+        testRedBlackTree();
     }
 
     public static int returnItself(int n) {
@@ -47,8 +40,17 @@ public class Test {
 
         IntStream.of(arr).forEach(key -> System.out.println("key: " + key + ", " + tree24.delete(key)));
         System.out.println(tree24.size());
+    }
+
+    public static void testRedBlackTree() {
+        RedBlackTree<Integer, Integer> redBlackTree = new RedBlackTree<>();
+        int[] arr = new Random().ints(500000, 0, 100000).distinct().toArray();
+
+        IntStream.of(arr).forEach(v -> redBlackTree.put(v, v));
 
 
+        System.out.println(redBlackTree.size());
+        redBlackTree.validateTree();
     }
 
 
