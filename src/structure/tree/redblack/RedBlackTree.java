@@ -270,16 +270,20 @@ public class RedBlackTree <K extends Comparable<K>, V> {
         size--;
         Node child;
 
-        if (node.left == null) {          // left child is null
+        /*
+              node    node       node
+              /  \    /  \       /  \
+            null ?   ?   null  node node
+         */
+        if (node.left == null) {              // left child is null
             child = node.right;
-        } else if (node.right == null) {  // right child is null
+        } else if (node.right == null) {      // right child is null
             child = node.left;
-        } else {                          // the node has both
-            Node successor = successor(node);
-            node.key = successor.key;     // copy successor's key
-            node.value = successor.value; // copy successor's value
-            node = successor;             // change node to successor
-            // successor can't be null because the node has left and right.
+        } else {                              // has both children
+            Node successor = successor(node); // successor can't be null
+            node.key = successor.key;         // copy successor's key
+            node.value = successor.value;     // copy successor's value
+            node = successor;                 // change node to successor
             child = successor.left != null ? successor.left : successor.right;
         }
 
@@ -292,11 +296,13 @@ public class RedBlackTree <K extends Comparable<K>, V> {
         transplant(node, child);
     }
 
+    /** O(log n) Fix Double-Black problem after deletion. Node must be BLACK */
     private void fixAfterDeletion(Node node) {
         while (node != root && node.color == BLACK) {
             if (node == node.parent.left) {
                 Node sib = node.parent.right;
 
+                // Case 1
                 if (sib.color == RED) {
                     sib.color = BLACK;
                     node.parent.color = RED;
@@ -304,18 +310,21 @@ public class RedBlackTree <K extends Comparable<K>, V> {
                     sib = node.parent.right;
                 }
 
-                if ((sib.left == null || sib.left.color == BLACK) && // Merge
+                // Case 2: Merge
+                if ((sib.left == null || sib.left.color == BLACK) &&
                     (sib.right == null || sib.right.color == BLACK)) {
                     sib.color = RED;
                     node = node.parent;
 
-                } else { // Transfer
+                } else {
+                    // Case3
                     if (sib.right == null || sib.right.color == BLACK) {
                         sib.left.color = BLACK;
                         sib.color = RED;
                         rotateRight(sib);
                         sib = node.parent.right;
                     }
+                    // Case 4: Transfer
                     sib.right.color = BLACK;
                     sib.color = node.parent.color;
                     node.parent.color = BLACK;
@@ -326,19 +335,21 @@ public class RedBlackTree <K extends Comparable<K>, V> {
             } else {
                 Node sib = node.parent.left;
 
+                // Case 1
                 if (sib.color == RED) {
                     sib.color = BLACK;
                     node.parent.color = RED;
                     rotateRight(node.parent);
                     sib = node.parent.left;
                 }
-
-                if ((sib.left == null || sib.left.color == BLACK) && // Merge
+                // Case 2: Merge
+                if ((sib.left == null || sib.left.color == BLACK) &&
                     (sib.right == null || sib.right.color == BLACK)) {
                     sib.color = RED;
                     node = node.parent;
 
-                } else { // Transfer
+                } else {
+                    // Case 3
                     if (sib.left == null ||
                         sib.left.color == BLACK) {
                         sib.right.color = BLACK;
@@ -346,6 +357,7 @@ public class RedBlackTree <K extends Comparable<K>, V> {
                         rotateLeft(sib);
                         sib = node.parent.left;
                     }
+                    // Case 4: Transfer
                     sib.left.color = BLACK;
                     sib.color = node.parent.color;
                     node.parent.color = BLACK;

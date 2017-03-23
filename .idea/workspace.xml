@@ -3,12 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="45351076-95b2-42e5-b58c-dc8be30c0baa" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/structure/tree/IsBinarySearchTree.java" afterPath="$PROJECT_DIR$/src/structure/tree/IsBinarySearchTree.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/structure/tree/avl/AVLTree.java" afterPath="$PROJECT_DIR$/src/structure/tree/avl/AVLTree.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/structure/tree/bst/BST.java" afterPath="$PROJECT_DIR$/src/structure/tree/bst/BST.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/structure/tree/redblack/RedBlackTree.java" afterPath="$PROJECT_DIR$/src/structure/tree/redblack/RedBlackTree.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/structure/tree/tree24/Tree24.java" afterPath="$PROJECT_DIR$/src/structure/tree/tree24/Tree24.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/testing/Test.java" afterPath="$PROJECT_DIR$/src/testing/Test.java" />
     </list>
     <ignored path="$PROJECT_DIR$/output/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,36 +15,6 @@
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
-  </component>
-  <component name="DockManager">
-    <window id="2">
-      <content type="file-editors">
-        <state>
-          <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-            <file leaf-file-name="TreeMap.java" pinned="false" current-in-tab="true">
-              <entry file="jar://C:/Program Files/Java/jdk1.8.0_102/src.zip!/java/util/TreeMap.java">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="1230">
-                    <caret line="2313" column="20" lean-forward="false" selection-start-line="2313" selection-start-column="17" selection-end-line="2313" selection-end-column="20" />
-                    <folding />
-                  </state>
-                </provider>
-              </entry>
-            </file>
-            <file leaf-file-name="Map.java" pinned="false" current-in-tab="false">
-              <entry file="jar://C:/Program Files/Java/jdk1.8.0_102/src.zip!/java/util/Map.java">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="489">
-                    <caret line="374" column="14" lean-forward="false" selection-start-line="374" selection-start-column="14" selection-end-line="374" selection-end-column="14" />
-                    <folding />
-                  </state>
-                </provider>
-              </entry>
-            </file>
-          </leaf>
-        </state>
-      </content>
-    </window>
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
@@ -90,8 +55,8 @@
       <file leaf-file-name="RedBlackTree.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/structure/tree/redblack/RedBlackTree.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="223">
-              <caret line="371" column="8" lean-forward="false" selection-start-line="371" selection-start-column="8" selection-end-line="371" selection-end-column="8" />
+            <state relative-caret-position="-1067">
+              <caret line="281" column="49" lean-forward="false" selection-start-line="281" selection-start-column="49" selection-end-line="281" selection-end-column="49" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -112,8 +77,8 @@
       <file leaf-file-name="Test.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/testing/Test.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="485">
-              <caret line="56" column="34" lean-forward="true" selection-start-line="56" selection-start-column="34" selection-end-line="56" selection-end-column="34" />
+            <state relative-caret-position="409">
+              <caret line="52" column="36" lean-forward="false" selection-start-line="52" selection-start-column="36" selection-end-line="52" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -943,12 +908,12 @@
       <workItem from="1489499901932" duration="2799000" />
       <workItem from="1489614253641" duration="18810000" />
       <workItem from="1489775370695" duration="28647000" />
-      <workItem from="1490121933148" duration="33677000" />
+      <workItem from="1490121933148" duration="36335000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="213419000" />
+    <option name="totallyTimeSpent" value="216077000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="0" width="1932" height="1038" extended-state="0" />
@@ -961,13 +926,13 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31797752" sideWeight="0.5021436" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" x="110" y="163" width="1738" height="848" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25617978" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25617978" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3188889" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31797752" sideWeight="0.49785638" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21061093" sideWeight="0.4877651" order="0" side_tool="false" content_ui="combo" x="919" y="191" width="324" height="613" />
@@ -1373,10 +1338,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_102/src.zip!/java/util/TreeMap.java">
+    <entry file="file://$PROJECT_DIR$/src/testing/Test.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1230">
-          <caret line="2313" column="20" lean-forward="false" selection-start-line="2313" selection-start-column="17" selection-end-line="2313" selection-end-column="20" />
+        <state relative-caret-position="409">
+          <caret line="52" column="36" lean-forward="false" selection-start-line="52" selection-start-column="36" selection-end-line="52" selection-end-column="36" />
           <folding />
         </state>
       </provider>
@@ -1389,18 +1354,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/testing/Test.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_102/src.zip!/java/util/TreeMap.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="485">
-          <caret line="56" column="34" lean-forward="true" selection-start-line="56" selection-start-column="34" selection-end-line="56" selection-end-column="34" />
+        <state relative-caret-position="1344">
+          <caret line="2313" column="20" lean-forward="false" selection-start-line="2313" selection-start-column="17" selection-end-line="2313" selection-end-column="20" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/structure/tree/redblack/RedBlackTree.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="371" column="8" lean-forward="false" selection-start-line="371" selection-start-column="8" selection-end-line="371" selection-end-column="8" />
+        <state relative-caret-position="-1067">
+          <caret line="281" column="49" lean-forward="false" selection-start-line="281" selection-start-column="49" selection-end-line="281" selection-end-column="49" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
