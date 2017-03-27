@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ArrayInterSection {
+public class FindIntersections {
 
     /*
         Get intersection numbers in the 2 lists
@@ -14,34 +14,8 @@ public class ArrayInterSection {
 
         listA n listB = [2, 3]
     */
-    public static List<Integer> getIntersections(List<Integer> listA, List<Integer> listB) {
-        Map<Integer, Integer> countOccurs = new HashMap<>();
-        int numOfLists = 2;
 
-        for (int k : listA) {
-            if (countOccurs.containsKey(k))
-                countOccurs.put(k, countOccurs.get(k) + 1);
-            else
-                countOccurs.put(k, 1);
-        }
-
-        for (int k : listB) {
-            if (countOccurs.containsKey(k))
-                countOccurs.put(k, countOccurs.get(k) + 1);
-            else
-                countOccurs.put(k, 1);
-        }
-
-        List<Integer> result = new ArrayList<>();
-        countOccurs.forEach((k, v) -> {
-            if (v == 2) result.add(k);
-        });
-
-        return result;
-    }
-
-    // get intersection numbers in lists
-    public static List<Integer> getIntersections(List<List<Integer>> lists) {
+    public static List<Integer> solve(List<List<Integer>> lists) {
         Map<Integer, Integer> countOccurs = new HashMap<>();
         final int numOfLists = lists.size();
 

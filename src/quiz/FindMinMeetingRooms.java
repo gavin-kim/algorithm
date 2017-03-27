@@ -1,12 +1,12 @@
-package quiz.timeinterval;
+package quiz;
 
 import java.util.Arrays;
 
-public class TimeInterval {
+public class FindMinMeetingRooms {
 
-    class Interval {
-        int start;
-        int end;
+    class Meeting {
+        int start; // starting time
+        int end;   // ending time
     }
 
     /**
@@ -27,15 +27,15 @@ public class TimeInterval {
      *
      *
      */
-    public int minMeetingRooms(Interval[] intervals) {
+    public int solve(Meeting[] meetings) {
 
-        int length = intervals.length;
+        int length = meetings.length;
         int[] starts = new int[length];
         int[] ends = new int[length];
 
         for (int i = 0; i < length; i++) {
-            starts[i] = intervals[i].start;
-            ends[i] = intervals[i].end;
+            starts[i] = meetings[i].start;
+            ends[i] = meetings[i].end;
         }
 
         Arrays.sort(starts);
@@ -46,10 +46,8 @@ public class TimeInterval {
         int endIndex = 0;
 
         while (startIndex < length) {
-            if (starts[startIndex] < ends[endIndex])
-                rooms++;
-            else
-                endIndex++;
+            if (starts[startIndex] < ends[endIndex]) rooms++;
+            else endIndex++;
 
             startIndex++;   // always increase start index
         }

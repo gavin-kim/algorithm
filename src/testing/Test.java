@@ -11,6 +11,8 @@ import java.io.ByteArrayInputStream;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -23,7 +25,10 @@ public class Test {
     private static final int RADIX_SIZE = 10;
 
     public static void main(String[] args) throws Exception{
-        testRedBlackTree();
+
+        long a = 1L << 33;
+        System.out.println((int)a);
+
     }
 
     public static int returnItself(int n) {
@@ -77,6 +82,13 @@ public class Test {
                 System.out.println("p");
             }
         }
+    }
+
+    public static boolean isRansom(Map<String, Integer> magazine, Map<String, Integer> note) {
+        return note.entrySet()
+            .stream()
+            .allMatch(entry -> magazine.containsKey(entry.getKey()) &&
+                magazine.get(entry.getKey()) >= entry.getValue());
     }
 
 
