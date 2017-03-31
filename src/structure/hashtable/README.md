@@ -27,10 +27,10 @@
         return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
     }
     
-## Separate Chaining (Collision resolution)
+## Collision resolution
 
-* L: A number of lists.
-* K: A number of keys.
-* A: The average length of the lists is always K / L.
+### Linear Probing
+![LinearProbing](/images/HashTableLinearProbing.png)
 
+### SeparateChaining
 ![SeparateChaining](/images/HashTableSeparateChaining.png)

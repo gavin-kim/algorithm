@@ -14,7 +14,7 @@ public class SeparateChainingHashTable<K, V> {
     int threshold; // the next size to resize (capacity * loadFactor)
     final float loadFactor;
 
-    class Node<K ,V> {
+    class Node<K, V> {
 
         final int hash;
         final K key;
@@ -25,6 +25,50 @@ public class SeparateChainingHashTable<K, V> {
             this.hash = hash;
             this.key = key;
             this.value = value;
+
         }
+    }
+    public V get(K key) {
+        Node<K, V> node;
+        return (node = getNode(hash(key), key)) == null ? null : node.value;
+    }
+
+    /** Find a node that has the same hash and key */
+    private Node<K, V> getNode(int hash, K key) {
+        if (key == null)
+            throw new NullPointerException("Key can't be null");
+
+        Node<K, V> node = table == null ?
+            null : table[hash & (table.length - 1)];
+
+        while (node != null) {
+            if (node.hash == hash && node.key.equals(key)) // find
+                break;
+
+            node = node.next;
+        }
+        return node;
+    }
+
+    public V put(K key, V value) {
+        return putNode(hash(key), key, value);
+    }
+
+    private V putNode(int hash, K key, V value) {
+        if
+    }
+
+    /**
+     * Initializes or doubles table size.
+     *
+     * @return the table
+     */
+    private Node<K, V>[] resize() {
+
+    }
+
+    static int hash(Object key) {
+        int h;
+        return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
     }
 }
