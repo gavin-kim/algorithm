@@ -27,10 +27,20 @@
         return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
     }
     
+## Load Factor, Rehashing and Efficiency
+
+* Double The size of a table when rehashing (64, 128, 256, 512 ...).
+  Power-of-2 sizes: bit masking is faster than integer division.  
+* It is important that keeping `Load Factor(hash size / table size) < 1` 
+  As Load Factor gets close to 1, the probability of a collision greatly 
+  increases.
+* Maintain `Load Factor < 5` for an open addressing (Linear Probing)
+* Maintain `Load Factor < 0.75` for a separate chaining   
+    
 ## Collision resolution
 
 ### Linear Probing
 ![LinearProbing](/images/HashTableLinearProbing.png)
 
-### SeparateChaining
+### Separate Chaining
 ![SeparateChaining](/images/HashTableSeparateChaining.png)

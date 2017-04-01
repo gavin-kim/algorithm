@@ -10,10 +10,7 @@ import structure.tree.tree24.Tree24;
 import java.io.ByteArrayInputStream;
 import java.math.BigInteger;
 import java.security.MessageDigest;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -24,11 +21,45 @@ public class Test {
     private static final int BUCKET_SIZE = 10;
     private static final int RADIX_SIZE = 10;
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        PriorityQueue<Integer> lower = new PriorityQueue<>(Comparator.reverseOrder());
+        PriorityQueue<Integer> higher = new PriorityQueue<>();
 
-        long a = 1L << 33;
-        System.out.println((int)a);
+        lower.add(in.nextInt());
+        System.out.println(lower.peek());
 
+        for(int i = 1; i < n; i++){
+
+            int v = in.nextInt();
+
+            if (lower.size() < higher.size()) { // lower
+                if (v > higher.peek()) {
+                    higher.add(v);
+                    lower.add(higher.poll());   // balance
+                } else
+                    lower.add(v);
+
+            } else { // higher
+                if (v < lower.peek()) {
+                    lower.add(v);
+                    higher.add(lower.poll());
+                } else
+                    higher.add(v);
+            }
+
+            System.out.println(getMedian(lower, higher));
+        }
+    }
+
+    public static double getMedian(Queue<Integer> lower, Queue<Integer> higher) {
+        int len = lower.size() + higher.size();
+
+        if ((len & 1) == 1)
+            return lower.size() > higher.size() ? lower.peek() : higher.peek();
+        else
+            return lower.peek() + higher.peek() / 2.0;
     }
 
     public static int returnItself(int n) {
