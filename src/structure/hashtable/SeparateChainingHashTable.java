@@ -23,6 +23,9 @@ public class SeparateChainingHashTable<K, V> {
         table = (Node<K, V>[])new Node[this.capacity];
     }
 
+    public int size() {
+        return size;
+    }
 
     public V get(K key) {
         Node<K, V> node;
@@ -45,6 +48,7 @@ public class SeparateChainingHashTable<K, V> {
         return node;
     }
 
+    /** Put a pair of key-value if the key exists, overwrite its value */
     public V put(K key, V value) {
         return putNode(hash(key), key, value);
     }
@@ -54,12 +58,12 @@ public class SeparateChainingHashTable<K, V> {
 
         if (table[index] == null) { // empty bucket
             table[index] = new Node<>(hash, key, value, null);
-            if (++size > threshold) resize(); // double table size
+            if (++size > threshold) table = resize(); // double table size
             return null;
         }
 
         Node<K, V> node = table[index];
-        Node<K, V> tail = node;
+        Node<K, V> previous = node;
 
         while (node != null) { // find the same key
             if (node.hash == hash && node.key.equals(key)) {
@@ -67,13 +71,37 @@ public class SeparateChainingHashTable<K, V> {
                 node.value = value;
                 return oldValue;
             }
-            tail = node;
+            previous = node;
             node = node.next;
         }
 
-        tail.next = new Node<>(hash, key, value, null);
-        if (++size > threshold) resize(); // double table size
+        previous.next = new Node<>(hash, key, value, null);
+        if (++size > threshold) table = resize(); // double table size
         return null;
+    }
+
+    public V delete(K key) {
+
+        return deleteNode(hash(key), key);
+    }
+
+    private V deleteNode(int hash, K key) {
+        Node<K, V> node = table[hash & (table.length - 1)];
+        Node<K, V> previous = null;
+
+        while (node != null) {
+            if (node.hash == hash && node.key.equals(key)) { // hit
+                if (previous == null) // node is head
+                    table[hash & (table.length - 1)] = node.next;
+                else
+                    previous.next = node.next;
+                size--;
+                break;
+            }
+            previous = node;
+            node = node.next;
+        }
+        return node == null ? null : node.value;
     }
 
     private static int hash(Object key) {
@@ -95,7 +123,7 @@ public class SeparateChainingHashTable<K, V> {
         @SuppressWarnings("unchecked")
         Node<K, V>[] newTab = (Node<K, V>[])new Node[newCap];
 
-        for (int i = 0; i < oldCap; i ++) {
+        for (int i = 0; i < oldCap; i ++) { // rehash 0 ~ n*2
             Node<K, V> node = table[i]; // node - n - n ...
             Node<K, V> loHead = null, loTail = null;
             Node<K, V> hiHead = null, hiTail = null;
@@ -129,6 +157,17 @@ public class SeparateChainingHashTable<K, V> {
             }
         }
         return newTab;
+    }
+
+    public void printHashTable() {
+        System.out.println("table size: " + table.length);
+        for (Node node: table) {
+            if (node != null) System.out.println();
+            while (node != null) {
+                System.out.print("[index: " + (node.hash & (table.length - 1)) + ", hash: " + node.hash + "]");
+                node = node.next;
+            }
+        }
     }
 
     class Node<K, V> {

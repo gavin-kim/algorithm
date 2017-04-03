@@ -30,7 +30,7 @@ public class MaxPQ<K extends Comparable<K>> {
             grow(size + 1);
 
         queue[++size] = value;
-        swim(size);
+        heapifyUp(size);
     }
 
     @SuppressWarnings("unchecked")
@@ -39,7 +39,7 @@ public class MaxPQ<K extends Comparable<K>> {
         swap(1, size);      // swap the root with the last element
         queue[size] = null; // delete the last element
         size--;             // reduce size;
-        sink(1);
+        heapifyDown(1);
         return max;
     }
 
@@ -57,7 +57,7 @@ public class MaxPQ<K extends Comparable<K>> {
 
     // Bottom-up reheapify
     @SuppressWarnings("unchecked")
-    private void swim(int target) {
+    private void heapifyUp(int target) {
 
         // compare [target](child) with [target / 2](parent) until a child is less than its parent
         while (target > 1 && less(queue[target / 2], queue[target])) {
@@ -67,7 +67,7 @@ public class MaxPQ<K extends Comparable<K>> {
     }
 
     // Top-down reheapify
-    private void sink(int target) {
+    private void heapifyDown(int target) {
         // remember target = 0 is never used
         while (target * 2 <= size) {
             int child = target * 2;
