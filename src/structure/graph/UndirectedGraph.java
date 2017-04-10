@@ -5,7 +5,7 @@ import java.util.*;
 
 public class UndirectedGraph<V> implements Graph<V> {
 
-    private Map<Integer, V> vertices = new HashMap<>();
+    private Map<Integer, V> nodes = new HashMap<>();
     private Map<Integer, List<Edge>> edges = new HashMap<>(); // edges.get(u).get(v)
     private int numOfEdges; // size of edges
 
@@ -14,11 +14,11 @@ public class UndirectedGraph<V> implements Graph<V> {
     public UndirectedGraph(File file) {
 
         try (Scanner input = new Scanner(file)) {
-            int numOfVertices = input.nextInt();
+            int numOfNode = input.nextInt();
             numOfEdges = input.nextInt(); // number of edges
 
-            for (int i = 0; i < numOfVertices; i++) {
-                addVertex(i, null);
+            for (int i = 0; i < numOfNode; i++) {
+                addNode(i, null);
             }
 
             while (input.hasNext()) {
@@ -35,8 +35,8 @@ public class UndirectedGraph<V> implements Graph<V> {
 
     // O(1)
     @Override
-    public int vertexSize() {
-        return vertices.size();
+    public int nodeSize() {
+        return nodes.size();
     }
 
     // O(1)
@@ -47,14 +47,14 @@ public class UndirectedGraph<V> implements Graph<V> {
 
     // O(1)
     @Override
-    public V getVertex(int index) {
-        return vertices.get(index);
+    public V getNode(int index) {
+        return nodes.get(index);
     }
 
     // O(1)
     @Override
-    public Iterable<V> getVertices() {
-        return vertices.values();
+    public Iterable<V> getNodes() {
+        return nodes.values();
     }
 
     // O(1)
@@ -71,12 +71,12 @@ public class UndirectedGraph<V> implements Graph<V> {
 
     // O(1)
     @Override
-    public V addVertex(int index, V vertex) {
+    public V addNode(int index, V vertex) {
 
-        if (vertices.containsKey(index))
-            return vertices.put(index, vertex);  // return previous vertex
+        if (nodes.containsKey(index))
+            return nodes.put(index, vertex);  // return previous vertex
         else {
-            vertices.put(index, vertex);
+            nodes.put(index, vertex);
             edges.put(index, new ArrayList<>()); // add a new list for edges
             return null;                         // return null
         }
@@ -84,19 +84,19 @@ public class UndirectedGraph<V> implements Graph<V> {
 
     // O(1 + degree(index) * (degree(u) + degree(v)))
     @Override
-    public V removeVertex(int index) {
-        if (vertices.containsKey(index)) // remove edges associated with the vertex
+    public V removeNode(int index) {
+        if (nodes.containsKey(index)) // remove edges associated with the vertex
             edges
                 .get(index)
                 .forEach((edge) -> removeEdge(edge.getU(), edge.getV()));
 
-        return vertices.remove(index); // remove vertex and return removed one
+        return nodes.remove(index); // remove vertex and return removed one
     }
 
     // O(1)
     @Override
     public boolean addEdge(int u, int v) {
-        if (vertices.containsKey(u) && vertices.containsKey(v)) {
+        if (nodes.containsKey(u) && nodes.containsKey(v)) {
             // Add a new edge (undirected u <--> v)
             edges.get(u).add(new Edge(u, v));
             edges.get(v).add(new Edge(v, u));
@@ -110,7 +110,7 @@ public class UndirectedGraph<V> implements Graph<V> {
     @Override
     public boolean removeEdge(int u, int v) {
         // Remove an edge (undirected u <--> v)
-        if (vertices.containsKey(u) && vertices.containsKey(v) &&
+        if (nodes.containsKey(u) && nodes.containsKey(v) &&
             edges.get(u).remove(v) != null && // u -> v
             edges.get(v).remove(u) != null){  // v -> u
             numOfEdges--;
@@ -121,104 +121,67 @@ public class UndirectedGraph<V> implements Graph<V> {
 
     // Depth first search from vertex v
     @Override
-    public GST dfs(int v) {
+    public List<Edge> dfs(int root) {
 
         Stack<Integer> stack = new Stack<>();
-        Set<Integer> unvisited = new HashSet<>(vertices.keySet());
-
-        // for GST
-        List<Integer> searchOrder = new ArrayList<>();
-        int[] parentOf = new int[vertices.size()];
-        int numOfGroups = 1;
+        Set<Integer> unvisited = new HashSet<>(nodes.keySet());
+        List<Edge> path = new ArrayList<>();
 
         // create iteratorMap
         Map<Integer, Iterator<Edge>> iteratorMap = new HashMap<>();
         edges.forEach((index, list) -> iteratorMap.put(index, list.iterator()));
 
-        int current = v;
+        int current = root;
         unvisited.remove(current);// visit
-        searchOrder.add(current); // add a vertex in search order
-        parentOf[current] = -1;   // no parent
 
-        // loop until all is visited
-        while (!unvisited.isEmpty()) {
-
+        do {
             // find edge to visit in current vertex
             if (iteratorMap.get(current).hasNext()) {
 
                 Edge edge = iteratorMap.get(current).next();
 
-                // visit to connected vertex and stack
-                if (unvisited.contains(edge.getV())) {
+                if (unvisited.remove(edge.getV())) {
                     current = edge.getV();     // move to new vertex
                     stack.push(current);       // stack current
-                    unvisited.remove(current); // check visited
-                    searchOrder.add(current);  // add current in searchOrder
-                    parentOf[edge.getV()] = edge.getU(); // store parent of current
+                    path.add(edge);  // add current in searchOrder
                 }
 
-            } else { // no edge to visit
+            } else if (!stack.isEmpty()) // no edge to visit
+                current = stack.pop();
 
-                // check the stack is empty
-                if (stack.isEmpty()) { // create a new group
-                    current = unvisited.stream().findFirst().get(); // choose a vertex in unvisited vertices
-                    unvisited.remove(current); // check visited
-                    searchOrder.add(current);  // add current in searchOrder
-                    numOfGroups++;             // new group
-                    parentOf[current] = -1;    // no parent
-                } else
-                    current = stack.pop(); // go back
-            }
-        }
-        return new GST(v, numOfGroups, parentOf, searchOrder);
+        } while (!stack.isEmpty());
+
+        return path;
     }
 
     // Breath First Search from vertex v
     @Override
-    public GST bfs(int v) {
+    public List<Edge> bfs(int root) {
         Queue<Integer> queue = new LinkedList<>();
-        Set<Integer> unvisited = new HashSet<>(vertices.keySet());
+        Set<Integer> unvisited = new HashSet<>(nodes.keySet());
+        List<Edge> path = new ArrayList<>();
 
-        // for GST
-        List<Integer> searchOrder = new ArrayList<>();
-        int numOfGroups = 1; // number of groups
-        int[] parentOf = new int[vertices.size()]; // parent of the vertex
-
-        // visit v
-        int current = v;
-        unvisited.remove(current);
-        searchOrder.add(current);
-        parentOf[current] = -1;
+        int current = root;
         queue.offer(current);
+        unvisited.remove(current);
 
-        // loop until all is visited
-        while(!unvisited.isEmpty()) {
-
-            // check the queue is empty
-            if (queue.isEmpty()) { // create a new group
-                current = unvisited.stream().findFirst().get(); // always true
-                unvisited.remove(current);
-                searchOrder.add(current);
-                numOfGroups++; // new group
-                parentOf[current] = -1;
-            } else
-                current = queue.poll();
+        while(!queue.isEmpty()) {
+            current = queue.poll();
 
             for (Edge edge : edges.get(current)) {
-                if (unvisited.contains(edge.getV())) {
+                if (unvisited.remove(edge.getV())) { // true: visited
+                    path.add(edge);  // add current in path
                     queue.offer(edge.getV());
-                    searchOrder.add(edge.getV());  // add current in searchOrder
-                    parentOf[edge.getV()] = edge.getU();
-                    unvisited.remove(edge.getV()); // visited
                 }
             }
         }
-        return new GST(v, numOfGroups, parentOf, searchOrder);
+
+        return path;
     }
 
     @Override
     public void clear() {
-        vertices = new HashMap<>();
+        nodes = new HashMap<>();
         edges = new HashMap<>();
         numOfEdges = 0;
     }
@@ -227,8 +190,8 @@ public class UndirectedGraph<V> implements Graph<V> {
     public String toString() {
         StringBuilder builder = new StringBuilder();
 
-        vertices.forEach((from, vertex) -> {
-            builder.append("Vertex Index: ").append(from).append(", ");
+        nodes.forEach((from, vertex) -> {
+            builder.append("Node Index: ").append(from).append(", ");
             edges.get(from).forEach((edge) -> builder.append(edge).append(", "));
             builder.append("\n");
         });

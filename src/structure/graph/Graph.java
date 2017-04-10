@@ -1,19 +1,21 @@
 package structure.graph;
 
 
+import java.util.List;
+
 public interface Graph<V> {
 
-    /** Return the number of vertices in the graph */
-    int vertexSize();
+    /** Return the number of nodes in the graph */
+    int nodeSize();
 
     /** Return the number of edges in the graph */
     int edgeSize();
 
     /** Return the object for the specified vertex index */
-    V getVertex(int index);
+    V getNode(int index);
 
-    /** Return the vertices in the graph */
-    Iterable<V> getVertices();
+    /** Return the nodes in the graph */
+    Iterable<V> getNodes();
 
     /** Return edges associated with the index */
     Iterable<Edge> getEdges(int index);
@@ -33,7 +35,7 @@ public interface Graph<V> {
      * @return the previous vertex associated with index,
      *         or null if there was no mapping
      */
-    V addVertex(int index, V vertex);
+    V addNode(int index, V vertex);
 
     /**
      * Remove a vertex to the graph. Edges related to the vertex will be removed
@@ -42,7 +44,7 @@ public interface Graph<V> {
      * @return the previous vertex associated with index, or null
      *         if there was no vertex
      */
-    V removeVertex(int index);
+    V removeNode(int index);
 
     /**
      * Add an edge between u and v
@@ -65,8 +67,8 @@ public interface Graph<V> {
     boolean removeEdge(int u, int v);
 
     /** Obtain a graph search tree using a depth-first search starting from v */
-    GST dfs(int v);
+    List<Edge> dfs(int v);
 
     /** Obtain a graph search tree using a breadth-first search starting from v */
-    GST bfs(int v);
+    List<Edge> bfs(int v);
 }

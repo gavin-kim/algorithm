@@ -1,4 +1,4 @@
-package structure.tree;
+package quiz;
 
 /**
  * Check the tree is a binary search tree
@@ -18,7 +18,7 @@ public class IsBinarySearchTree {
 
     private boolean checkBST(Node node, int min, int max) {
 
-        return node == null || node.data > min && node.data < max &&
+        return node == null ||
             checkBST(node.left, min, node.data) &&
             checkBST(node.right, node.data, max);
     }

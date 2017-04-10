@@ -3,19 +3,19 @@ package quiz;
  *  Counts swap (insertion) using Merge-Sort
  *
  *  arr [. . . .   . . .]     aux [1 3 5 6 | 2 4 7]
- *       k                         i         j
+ *       k                         l         r
  *
  *  arr [1 . . .   . . .]     aux [. 3 5 6 | 2 4 7] inversion []
- *         k                         i       j
+ *         k                         l       r
  *
- *  arr [1 2 . .   . . .]     aux [. 3 5 6 | . 4 7] inversion [3 5 6] len = j - k
- *           k                       i         j
+ *  arr [1 2 . .   . . .]     aux [. 3 5 6 | . 4 7] inversion [3 5 6] len = r - k
+ *           k                       l         r
  *
  *  arr [1 2 3 .   . . .]     aux [. . 5 6 | . 4 7] inversion []
- *             k                       i       j
+ *             k                       l       r
  *
- *  arr [1 2 3 4   . . .]     aux [. . 5 6 | . . 7] inversion [5 6] len = j - k
- *                 k                   i         j
+ *  arr [1 2 3 4   . . .]     aux [. . 5 6 | . . 7] inversion [5 6] len = r - k
+ *                 k                   l         r
  */
 public class CountingInversions {
 
@@ -37,22 +37,22 @@ public class CountingInversions {
     private static long merge(int[] arr, int[] aux, int lo, int mid, int hi) {
 
         long count = 0;
-        int i = lo;
-        int j = mid + 1;
+        int left = lo;
+        int right = mid + 1;
 
         for (int p = lo; p <= hi; p++)
             aux[p] = arr[p];
 
-        for (int k = lo; k <= hi; k++) {
-            if (i > mid)
-                arr[k] = aux[j++];
-            else if (j > hi)
-                arr[k] = aux[i++];
-            else if (aux[i] <= aux[j])
-                arr[k] = aux[i++];
+        for (int i = lo; i <= hi; i++) {
+            if (left > mid)
+                arr[i] = aux[right++];
+            else if (right > hi)
+                arr[i] = aux[left++];
+            else if (aux[left] <= aux[right])
+                arr[i] = aux[left++];
             else {
-                count += j - k;
-                arr[k] = aux[j++];
+                count += right - i; // count steps between i and right
+                arr[i] = aux[right++];
             }
         }
         return count;

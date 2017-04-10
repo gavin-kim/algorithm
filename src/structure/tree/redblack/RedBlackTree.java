@@ -369,8 +369,8 @@ public class RedBlackTree <K extends Comparable<K>, V> {
         node.color = BLACK;
     }
 
-    private boolean validateNode(Node node) {
-        return (node.color == RED) && (node.parent.color == RED);
+    private boolean isDoubleRed(Node node, Node parent) {
+        return (node.color == RED) && (parent.color == RED);
     }
 
     public void validateTree() {
@@ -381,14 +381,13 @@ public class RedBlackTree <K extends Comparable<K>, V> {
         if (root.left != null) nodes.add(root.left);
         if (root.right != null) nodes.add(root.right);
 
-
         while (!nodes.isEmpty()) {
             List<Node> nodeList = new ArrayList<>(nodes.size() * 3);
 
             nodes.forEach(node -> {
-
-                if (validateNode(node))
-                    System.out.println((node.color ? "BLACK" : "RED") + " : " + (node.parent.color ? "BLACK" : "RED"));
+                if (isDoubleRed(node, node.parent)) // check Double-Red
+                    System.out.println((node.color ? "BLACK" : "RED") + " : " +
+                        (node.parent.color ? "BLACK" : "RED"));
                 if (node.left != null) nodeList.add(node.left);
                 if (node.right != null) nodeList.add(node.right);
             });

@@ -12,7 +12,7 @@ public class GST {
     private int numOfGroups;
     private int[] parentOf; // parents of vertices
     private List<Integer> searchOrder; // search order
-
+    private List<List<Integer>> groups;
 
     public GST(int root, int numOfGroups,
                int[] parentOf, List<Integer> searchOrder) {
