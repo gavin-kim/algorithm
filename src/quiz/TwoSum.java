@@ -3,7 +3,8 @@ package quiz;
 import java.util.HashMap;
 
 /**
- * Finds two integer x, y (must be different indices), that x + y == sum
+ * Finds two integer x, y, that x + y == sum
+ * (NOTE: x and y must be different indices)
  *
  * O(n)
  */
@@ -16,9 +17,9 @@ public class TwoSum {
             int complement = sum - arr[i]; // look for the complement
 
             if (map.containsKey(complement))
-                return new int[] {i + 1, map.get(complement)}; // found
+                return new int[] {i, map.get(complement)}; // found
             else
-                map.put(arr[i], i + 1);
+                map.put(arr[i], i);
         }
         return null;
     }
