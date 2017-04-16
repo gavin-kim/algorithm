@@ -2,20 +2,33 @@ package recursion;
 
 public class Memoization {
 
-    // O(n) time
-    public static void allFib(int n) {
+    /**
+     * Recursion with memoization
+     * Time  Complexity O(n)
+     * Space Complexity O(n)
+     *
+     *                      fib(6)
+     *                      /   \
+     *                  fib(5) fib(4) <- return memo[4]
+     *                  /   \
+     *              fib(4) fib(3) <- return memo[3]
+     *              /   \
+     *          fib(3) fib(2) <- return memo[2]
+     *          /   \
+     *      fib(2) fib(1)
+     *      /   \
+     *  fib(1) fib(0)
+     */
+    public static int fib(int n) {
         int[] memo = new int[n + 1];
-
-        for (int i = 0; i < n; i++)  // store previous fibonacci numbers
-            System.out.println(i + ": " + fib(i, memo));
+        return fib(n, memo);
     }
 
-    public static int fib(int n, int[] memo) {
+    private static int fib(int n, int[] memo) {
         if (n <= 0) return 0;
         else if (n == 1) return 1;
-        else if (memo[n] > 0) return memo[n]; // always hit after n = 3
-
-        memo[n] = fib(n - 1, memo) + fib(n - 2, memo);
+        else if (memo[n] == 0) // hit only memo[n] is null
+            memo[n] = fib(n - 1, memo) + fib(n - 2, memo);
 
         return memo[n];
     }

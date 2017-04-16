@@ -3,6 +3,7 @@ package testing;
 
 import java.io.File;
 import java.io.IOException;
+import java.security.SecureRandom;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -58,5 +59,18 @@ public class TestUtils {
         }
 
         System.out.println(builder);
+    }
+
+    private static final String AB =
+        "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    private static SecureRandom random = new SecureRandom();
+
+    public static String getRandomString(int length) {
+        char[] letters = new char[length];
+
+        for (int i = 0; i < length; i++)
+            letters[i] = AB.charAt(random.nextInt(AB.length()));
+
+        return String.valueOf(letters);
     }
 }

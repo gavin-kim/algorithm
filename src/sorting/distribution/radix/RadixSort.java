@@ -23,7 +23,7 @@ public class RadixSort {
         int numOfCountingSort = b / r;
         int range = 1 << r;            // 0 ~ 2^r: a range of integers to count each time
 
-        for (int p = 0; p < numOfCountingSort; p++) {
+        for (int p = 0; p < numOfCountingSort; p++) { // O(b / r)
             int[] countingArr = new int[range]; // 1, 2, 4, 8, ...
 
             // counting sort

@@ -4,9 +4,14 @@ import java.util.Arrays;
 
 public class FindMinMeetingRooms {
 
-    class Meeting {
+    public static class Meeting {
         int start; // starting time
         int end;   // ending time
+
+        public Meeting(int start, int end) {
+            this.start = start;
+            this.end = end;
+        }
     }
 
     /**
@@ -19,37 +24,37 @@ public class FindMinMeetingRooms {
      *
      *
      * 1 3 5 7 9 ...
-     * S------E          start times: 1, 3, 4, 6, 12
-     *   SE                end times: 4, 7, 8, 12, 14
-     *    S--E
-     *      S-----E
-     *            S-E
-     *
-     *
+     * s---|-------e            start times: 1, 3, 4, 6, 12
+     *   s-e       |              end times: 4, 7, 8, 12, 14
+     *    s|--e    |
+     *     |s-|----|e
+     *     |s-|----|-e
+     *     |  |  s-|----
+     *     |  |  s-|----
+     *     |  V    third end time (+ 1 rooms (2-1)) 1 room is finished
+     *     V  second end time (+1 rooms (2-1)) 1 room is finished
+     *     first end time (+3 rooms)
      */
-    public int solve(Meeting[] meetings) {
+    public static int solve(Meeting[] meetings) {
 
         int length = meetings.length;
-        int[] starts = new int[length];
-        int[] ends = new int[length];
+        int[] startTimes = new int[length];
+        int[] endTimes = new int[length];
 
         for (int i = 0; i < length; i++) {
-            starts[i] = meetings[i].start;
-            ends[i] = meetings[i].end;
+            startTimes[i] = meetings[i].start;
+            endTimes[i] = meetings[i].end;
         }
 
-        Arrays.sort(starts);
-        Arrays.sort(ends);
+        Arrays.sort(startTimes);
+        Arrays.sort(endTimes);
 
         int rooms = 0;
-        int startIndex = 0;
         int endIndex = 0;
 
-        while (startIndex < length) {
-            if (starts[startIndex] < ends[endIndex]) rooms++;
+        for (int startTime : startTimes) {
+            if (startTime < endTimes[endIndex]) rooms++;
             else endIndex++;
-
-            startIndex++;   // always increase start index
         }
         return rooms;
     }

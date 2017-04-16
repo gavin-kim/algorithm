@@ -1,21 +1,13 @@
 package testing;
 
 
-import com.sun.org.apache.bcel.internal.util.ByteSequence;
-import quiz.FileIndex;
-import structure.hashtable.SeparateChainingHashTable;
-import structure.tree.bst.BST;
-import structure.tree.redblack.RedBlackTree;
-import structure.tree.tree24.Tree24;
+import dynamic.CoinChangeMin;
+import quiz.FindMinMeetingRooms;
+import recursion.CountPaths;
+import recursion.Memoization;
 
-
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.util.*;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
+import static recursion.CountPaths.grid;
+import static recursion.CountPaths.grid2;
 
 public class Test {
 
@@ -27,6 +19,17 @@ public class Test {
 
     public static void main(String[] args) throws Exception {
 
+        //CoinChangeMin.solve(13, new int[]{7,2,3,6}).forEach(System.out::println);
+        FindMinMeetingRooms.Meeting[] meetings = {
+            new FindMinMeetingRooms.Meeting(1, 6),
+            new FindMinMeetingRooms.Meeting(2, 12),
+            new FindMinMeetingRooms.Meeting(2, 7),
+            new FindMinMeetingRooms.Meeting(12, 8),
+            new FindMinMeetingRooms.Meeting(5, 14),
+            new FindMinMeetingRooms.Meeting(5, 14),
+            new FindMinMeetingRooms.Meeting(9, 14)
+        };
+        System.out.println(FindMinMeetingRooms.solve(meetings));
     }
 
 }
