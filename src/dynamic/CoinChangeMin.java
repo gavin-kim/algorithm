@@ -57,9 +57,10 @@ public class CoinChangeMin {
             for (int j = coins[i]; j <= target; j++) {
 
                 // Total Without current coin and 1(current coin)
+                // [j - coin]: combination of [0, 1, 2... j - coin]
                 int amount = T[j - coins[i]];
-                if (amount != Integer.MAX_VALUE && T[j] > ++amount) {
-                    T[j] = amount;
+                if (amount != Integer.MAX_VALUE && T[j] > amount + 1) {
+                    T[j] = amount + 1;
                     coinIndices[j] = i;
                 }
             }

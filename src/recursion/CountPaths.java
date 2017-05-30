@@ -3,7 +3,7 @@ package recursion;
 public class CountPaths {
 
     /**
-     *  count moves from (0, 0) to the (h-1, w-1)
+     *  count paths from (0, 0) to the (h-1, w-1) in a matrix[row][col]
      */
     public static int countPaths(boolean[][] grid) {
         return countPaths(grid, 0, 0, new int[MAX_ROW][MAX_COL]);
