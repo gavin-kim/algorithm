@@ -1,11 +1,6 @@
 package testing;
 
-import dynamic.Equal;
-import dynamic.KingdomDivision;
-
-import java.io.File;
-import java.util.Arrays;
-import java.util.Scanner;
+import dynamic.SumOfSubstrings;
 
 public class Test {
 
@@ -16,7 +11,7 @@ public class Test {
     private static final String RESOURCE_ROOT = "resources/data/";
 
     public static void main(String[] args) throws Exception {
-        KingdomDivision.solve();
+        System.out.println(SumOfSubstrings.solve("972698438521"));
     }
 
 }
