@@ -8,7 +8,7 @@ package dynamic;
  *           ......      +
  *     |A(2)   -   A(1)| +
  *
- * Ai = x = 1 <= x <= Bi
+ * Ai = x (between 1 and Bi)
  *
  * Inputs:
  * T = number of test cases

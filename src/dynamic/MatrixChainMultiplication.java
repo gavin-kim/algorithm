@@ -80,7 +80,7 @@ public class MatrixChainMultiplication {
             for (int i = 1; i <= n - len + 1; i++) {
                 int j = i + len - 1;
                 m[i][j] = Integer.MAX_VALUE;
-                for (int k = i; k < j; k++) { // i <= k < j
+                for (int k = i; k < j; k++) { // k: i <= k < j
                     int product = m[i][k] + m[k+1][j] + p[i-1] * p[k] * p[j];
                     if (product < m[i][j]) {  // store smaller product
                         m[i][j] = product;
@@ -90,16 +90,16 @@ public class MatrixChainMultiplication {
             }
         }
 
-        System.out.println(printOptimalParens(s, 1, n));
+        System.out.println(printOptimalCombination(s, 1, n));
         return m;
     }
 
-    private static String printOptimalParens(int[][] s, int i, int j) {
+    private static String printOptimalCombination(int[][] s, int i, int j) {
 
         if (i == j)
             return "A" + i;
         else
-            return "(" + printOptimalParens(s, i, s[i][j]) +
-                        printOptimalParens(s, s[i][j] + 1, j) + ")";
+            return "(" + printOptimalCombination(s, i, s[i][j]) +
+                        printOptimalCombination(s, s[i][j] + 1, j) + ")";
     }
 }

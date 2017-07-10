@@ -56,7 +56,7 @@ public class CutRod {
         memo[0] = 0;
         for (int i = 1; i <= len; i++) {
             int max = Integer.MIN_VALUE;
-            for (int j = 1; j <= i; i++)
+            for (int j = 1; j <= i; j++)
                 if (max < prices[j] + memo[i - j]) {
                     max = prices[j] + memo[i - j];
                     firstPieceOf[i] = j;
